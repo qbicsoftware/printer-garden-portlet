@@ -66,13 +66,22 @@ public class MyPortletUI extends UI {
         return grid;
     }
 
+
+    /**
+     * Saves new printer entry
+     * @param entry new printer_project_association
+     */
     public void save(PrinterProjectAssociation entry){
         projectDatabase.save(entry);
     }
 
+
+
     public void delete(String id){
         projectDatabase.delete(id);
     }
+
+
 
     public void update(){
         grid.clearSortOrder();
