@@ -6,10 +6,16 @@ import elemental.events.KeyboardEvent;
 
 public class PrinterForm extends FormLayout{
 
-    private TextField printerId = new TextField("Printer ID");
-    private TextField projectId = new TextField("Project ID");
+    private TextField name = new TextField("Name");
     private TextField ID = new TextField("ID");
+    private TextField location = new TextField("Location");
+    private TextField URL = new TextField("URL");
+    private TextField userGroup = new TextField("User group");
+
     private ComboBox status = new ComboBox("Status");
+    private ComboBox type = new ComboBox("Type");
+    private ComboBox adminOnly = new ComboBox("Admin only");
+
     private Button saveButton = new Button("Save");
     private Button deleteButton = new Button("Delete");
 
@@ -20,14 +26,27 @@ public class PrinterForm extends FormLayout{
         this.myUI = myUI;
 
         setSizeUndefined();
-        addComponents(printerId, projectId, status, saveButton, ID, deleteButton);
+        addComponents(name, location, URL, status, type, adminOnly, userGroup, saveButton, ID, deleteButton);
+
         for(PrinterStatus p : PrinterStatus.values()){
             status.addItem(p);
         }
 
         status.setNullSelectionAllowed(false);
         status.setValue(PrinterStatus.ACTIVE);
-        
+
+        for(PrinterType p : PrinterType.values()){
+            type.addItem(p);
+        }
+
+        type.setNullSelectionAllowed(false);
+        type.setValue(PrinterType.LABELPRINTER);
+
+        adminOnly.addItem("True");
+        adminOnly.addItem("False");
+        adminOnly.setNullSelectionAllowed(false);
+        adminOnly.setValue("True");
+
         saveButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
         saveButton.setClickShortcut(KeyboardEvent.KeyCode.ENTER);
 
@@ -39,22 +58,7 @@ public class PrinterForm extends FormLayout{
 
     private void save(){
 
-        printerProjectAssociation = new PrinterProjectAssociation();
 
-        if (projectId == null || printerId == null || projectId.isEmpty() || printerId.isEmpty()) {
-            System.out.println("Please enter information");
-        }else{
-            printerProjectAssociation.setPrinterID(printerId.getValue());
-            printerProjectAssociation.setProjectID(projectId.getValue());
-            printerProjectAssociation.setStatus((PrinterStatus) status.getValue());
-            myUI.save(printerProjectAssociation);
-
-            printerId.clear();
-            projectId.clear();
-            status.clear();
-            myUI.update();
-
-        }
 
     }
 
@@ -63,9 +67,9 @@ public class PrinterForm extends FormLayout{
         if(ID == null || ID.isEmpty()){
             System.out.println("Please enter information");
         }else {
-            myUI.delete(ID.getValue());
+            myUI.delete(Table.labelprinter.toString(), ID.getValue());
             ID.clear();
-            myUI.update();
+            //myUI.updatePrinterProjectAssociation();
         }
     }
 }

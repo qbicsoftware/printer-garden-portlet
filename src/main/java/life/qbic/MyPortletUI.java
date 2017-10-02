@@ -1,9 +1,5 @@
 package life.qbic;
 
-import javax.portlet.PortletContext;
-import javax.portlet.PortletSession;
-
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vaadin.annotations.Theme;
@@ -11,7 +7,7 @@ import com.vaadin.annotations.Widgetset;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;
-import life.qbic.portal.liferayandvaadinhelpers.main.LiferayAndVaadinUtils;
+import database.DatabaseAbstract;
 
 import java.sql.SQLException;
 
@@ -21,69 +17,82 @@ import java.sql.SQLException;
 public class MyPortletUI extends UI {
 
     private static Log log = LogFactoryUtil.getLog(MyPortletUI.class.getName());
-    private PrinterForm printerForm = new PrinterForm(this);
+    private PrinterProjectForm printerProjectForm = new PrinterProjectForm(this);
+    private PrinterForm projectForm = new PrinterForm(this);
     private SQLContainer table;
-    private ProjectDatabaseInterface projectDatabase;
-    private Grid grid;
-
+    private DatabaseAbstract database;
+    private Grid gridPrinterProjectAsso;
+    private Grid gridPrinter;
 
     @Override
     protected void init(VaadinRequest request) {
 
         final VerticalLayout mainFrame = new VerticalLayout();
-        final HorizontalLayout mainContent = new HorizontalLayout();
+        final HorizontalLayout contentPrinterProject = new HorizontalLayout();
+        final HorizontalLayout contentPrinter = new HorizontalLayout();
 
-        projectDatabase = new ProjectDatabaseImpl();
-
-        try {
-            projectDatabase.connectToDatabase();
-            log.info("Connection to SQL project database was successful.");
-        } catch (SQLException exp) {
-            log.error("Could not connect to SQL project database. Reason: " + exp.getMessage());
-        }
+        database = new DatabaseAbstract();
+        connectToDatabase();
 
         try {
-
-            grid = loadDBtoGrid();
-
-            mainContent.setSizeFull();
-            grid.setSizeFull();
-            mainContent.addComponents(grid, printerForm);
-            mainContent.setExpandRatio(grid, 1);
+            gridPrinterProjectAsso = loadDBtoGrid(Table.printer_project_association.toString(), "id");
+            gridPrinter = loadDBtoGrid(Table.labelprinter.toString(), "id");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        mainFrame.addComponent(mainContent);
+
+        //gridPrinterProjectAsso.addRow("","","");
+        contentPrinterProject.setSizeFull();
+        contentPrinterProject.addComponents(gridPrinterProjectAsso, printerProjectForm);
+        contentPrinterProject.setExpandRatio(gridPrinterProjectAsso, 1);
+
+        contentPrinter.setSizeFull();
+        contentPrinter.addComponents(gridPrinter, projectForm);
+        contentPrinter.setExpandRatio(gridPrinter, 1);
+
+        mainFrame.addComponents(contentPrinterProject, contentPrinter);
         setContent(mainFrame);
     }
 
-    private Grid loadDBtoGrid() throws SQLException{
-        table = projectDatabase.loadCompleteTableData("printer_project_association", "id");
+    private Grid loadDBtoGrid(String tableName, String primaryKey) throws SQLException{
+        table = database.loadCompleteTableData(tableName, primaryKey);
         log.info("Loading of project database was successful.");
         Grid grid = new Grid();
+        grid.setEditorEnabled(true);
+        grid.setEditorBuffered(false);
         grid.setContainerDataSource(table);
+        grid.setSizeFull();
         return grid;
     }
 
+    private void connectToDatabase(){
+        try {
+            database.connectToDatabase();
+            log.info("Connection to SQL project database was successful.");
+        } catch (SQLException exp) {
+            log.error("Could not connect to SQL project database. Reason: " + exp.getMessage());
+        }
+    }
 
     /**
      * Saves new printer entry
      * @param entry new printer_project_association
      */
-    public void save(PrinterProjectAssociation entry){
-        projectDatabase.save(entry);
+    public void savePrinterProjectAssociation(PrinterProjectAssociation entry){
+        database.save(Table.printer_project_association.toString(),"(printer_id, project_id, status)", "(" + entry.getPrinterID()
+                + ", " + entry.getProjectID() + ", '" + entry.getStatus() + "')");
     }
 
 
 
-    public void delete(String id){
-        projectDatabase.delete(id);
+    public void delete(String tableName, String id){
+        database.delete(tableName, id);
     }
 
 
 
-    public void update(){
-        grid.clearSortOrder();
+    public void updatePrinterProjectAssociation(){
+        gridPrinterProjectAsso.clearSortOrder();
     }
 }
