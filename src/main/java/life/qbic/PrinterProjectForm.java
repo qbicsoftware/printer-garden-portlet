@@ -42,7 +42,7 @@ public class PrinterProjectForm extends FormLayout{
         printerProjectAssociation = new PrinterProjectAssociation();
 
         if (projectId == null || printerId == null || projectId.isEmpty() || printerId.isEmpty()) {
-            System.out.println("Please enter information");
+            System.out.println("Please enter information here");
         }else{
             printerProjectAssociation.setPrinterID(printerId.getValue());
             printerProjectAssociation.setProjectID(projectId.getValue());
@@ -51,7 +51,9 @@ public class PrinterProjectForm extends FormLayout{
 
             printerId.clear();
             projectId.clear();
-            status.clear();
+            status.setNullSelectionAllowed(false);
+            status.setValue(PrinterStatus.ACTIVE);
+
             myUI.updatePrinterProjectAssociation();
 
         }

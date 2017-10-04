@@ -1,5 +1,9 @@
 package life.qbic;
 
 public enum PrinterType {
-    LABELPRINTER
+    LABELPRINTER{
+        public String toString(){
+            return "LABEL PRINTER";
+        }
+    }
 }
