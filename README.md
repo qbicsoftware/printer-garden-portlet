@@ -1,1 +1,1 @@
-Maintaining and updating printer project associations and label printer locations
+Maintaining and updating tables.printer tables.project associations and label tables.printer locations

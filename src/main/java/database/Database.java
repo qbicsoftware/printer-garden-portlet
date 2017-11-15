@@ -5,6 +5,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.data.util.sqlcontainer.connection.JDBCConnectionPool;
 import com.vaadin.data.util.sqlcontainer.connection.SimpleJDBCConnectionPool;
+import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.data.util.sqlcontainer.query.TableQuery;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
@@ -20,6 +21,10 @@ public class Database {
     private String driverName = "com.mysql.jdbc.Driver";
 
     private String connectionURI = "jdbc:mysql://portal-testing.am10.uni-tuebingen.de:3306/qbic_usermanagement_db";
+
+    public JDBCConnectionPool getPool() {
+        return pool;
+    }
 
     JDBCConnectionPool pool;
 
@@ -52,20 +57,18 @@ public class Database {
         SQLContainer tableContent = new SQLContainer(query);
         tableContent.setAutoCommit(true);
 
-//        addGeneratedColumn("printer_id", new Table.ColumnGenerator(){
-//            public Component generateCell(Table source, Object itemID, Object columnID){
-//                if(getItem(itemID).getItemProperty("printer_id").getValue() != null){
-//                    Label l = new Label();
-//                    int printerID = (Integer) getItem(itemID).getItemProperty("printer_id").getValue();
-//                    l.setValue(app.getDbHelp().getPrinterName(printerID));
-//                    l.setSizeUndefined();
-//                    return l;
-//                }
-//                return null;
-//            }
-//        });
 
         return tableContent;
+    }
+
+    public SQLContainer loadNames() throws SQLException{
+        FreeformQuery printer_name = new FreeformQuery("SELECT printer_project_association.id, printer_project_association.printer_id, labelprinter.name, labelprinter.location, \n" +
+                "printer_project_association.project_id, projects.openbis_project_identifier, printer_project_association.status\n" +
+                "FROM qbic_usermanagement_db.printer_project_association\n" +
+                "INNER JOIN labelprinter ON printer_project_association.printer_id = labelprinter.id\n" +
+                "INNER JOIN projects ON printer_project_association.project_id = projects.id\n" +
+                "ORDER BY printer_project_association.id;", pool);
+        return new SQLContainer(printer_name);
     }
 
     public void delete(String tableName, String id) {
