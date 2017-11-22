@@ -1,9 +1,16 @@
 package tables.printer;
 
 public enum PrinterType {
-    LABELPRINTER{
-        public String toString(){
-            return "LABEL PRINTER";
-        }
+    LABELPRINTER("LABEL PRINTER");
+
+    private String name;
+    PrinterType(String name){
+        this.name = name;
     }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
+
 }

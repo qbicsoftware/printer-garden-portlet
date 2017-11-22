@@ -6,9 +6,6 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Printer implements Serializable, Cloneable {
 
-
-    private Long ID;
-
     private String name = "";
 
     private String location = "";
@@ -23,60 +20,41 @@ public class Printer implements Serializable, Cloneable {
 
     private String userGroup = "";
 
+    Printer (String name, String location, String url, PrinterStatus status, PrinterType type, Boolean isAdmin, String userGroup){
+        this.name = name;
+        this.location = location;
+        this.url = url;
+        this.status = status;
+        this.type = type;
+        setIsAdmin(isAdmin);
+        this.userGroup = userGroup;
 
-    public Long getID() {
-        return ID;
     }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getUrl() {
         return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public PrinterStatus getStatus() {
         return status;
     }
 
-    public void setStatus(PrinterStatus status) {
-        this.status = status;
-    }
-
     public PrinterType getType() {
         return type;
-    }
-
-    public void setType(PrinterType type) {
-        this.type = type;
     }
 
     public String getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(Boolean isAdmin) {
+    private void setIsAdmin(Boolean isAdmin) {
         if (isAdmin){
             this.isAdmin = "1";
         }else{
@@ -89,35 +67,32 @@ public class Printer implements Serializable, Cloneable {
         return userGroup;
     }
 
-    public void setUserGroup(String userGroup) {
-        this.userGroup = userGroup;
-    }
-
-    public boolean isPersisted() {
-        return ID != null;
-    }
-
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (this.ID == null) {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        if (obj instanceof Printer && obj.getClass().equals(getClass())) {
-            return this.ID.equals(((Printer) obj).ID);
-        }
+        Printer printer = (Printer) o;
 
-        return false;
+        if (!name.equals(printer.name)) return false;
+        if (!location.equals(printer.location)) return false;
+        if (!url.equals(printer.url)) return false;
+        if (status != printer.status) return false;
+        if (type != printer.type) return false;
+        if (!isAdmin.equals(printer.isAdmin)) return false;
+        return userGroup.equals(printer.userGroup);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 43 * hash + (ID == null ? 0 : ID.hashCode());
-        return hash;
+        int result = name.hashCode();
+        result = 31 * result + location.hashCode();
+        result = 31 * result + url.hashCode();
+        result = 31 * result + status.hashCode();
+        result = 31 * result + type.hashCode();
+        result = 31 * result + isAdmin.hashCode();
+        result = 31 * result + userGroup.hashCode();
+        return result;
     }
 
     @Override

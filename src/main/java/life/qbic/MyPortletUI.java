@@ -9,16 +9,21 @@ import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;
 import database.Database;
+import database.Query;
+import javafx.util.Pair;
+import tables.Form;
 import tables.printer.Printer;
+import tables.printer.PrinterFields;
 import tables.printer.PrinterForm;
-import tables.printerName.PrinterName;
-import tables.printerName.PrinterNameForm;
 import tables.printerProjectAssociation.PrinterProjectAssociation;
+import tables.printerProjectAssociation.PrinterProjectAssociationForm;
 import tables.Table;
+import tables.printerProjectAssociation.PrinterProjectFields;
+import tables.project.ProjectFields;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
 
 @Theme("mytheme")
 @SuppressWarnings("serial")
@@ -26,155 +31,163 @@ import java.sql.Statement;
 public class MyPortletUI extends UI {
 
     private static Log log = LogFactoryUtil.getLog(MyPortletUI.class.getName());
-    private PrinterForm projectForm;
-    private PrinterNameForm printerNameForm;
+
+    private Form projectForm;
+    private Form printerProjectAssociationForm;
+
     private SQLContainer tableLabelprinter;
-    private SQLContainer tablePrinterName;
+    private SQLContainer tablePrinterProjectAssociation;
+
     private Database database;
-    private Grid gridPrinterProjectAsso = new Grid();
+
     private Grid gridPrinter;
-    private Grid gridPrinterName;
+    private Grid gridPrinterProjectAssociation;
 
     @Override
     protected void init(VaadinRequest request) {
 
         final VerticalLayout mainFrame = new VerticalLayout();
-        final HorizontalLayout contentPrinter = new HorizontalLayout();
-        final HorizontalLayout contentPrinterName = new HorizontalLayout();
-
-        database = new Database();
         connectToDatabase();
 
         try {
-
-            tableLabelprinter = database.loadCompleteTableData(tables.Table.labelprinter.toString(), "id");
-            tableLabelprinter.setAutoCommit(true);
-            gridPrinter = loadDBtoGrid(tableLabelprinter);
-
-
-            tablePrinterName = database.loadNames();
-            gridPrinterName = loadDBtoGrid(tablePrinterName);
-
+            setData();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        contentPrinter.setSizeFull();
-        projectForm = new PrinterForm(this);
-        contentPrinter.addComponents(gridPrinter, projectForm);
-        contentPrinter.setExpandRatio(gridPrinter, 1);
-
-        gridPrinter.getEditorFieldGroup().addCommitHandler(new FieldGroup.CommitHandler() {
-            @Override
-            public void preCommit(FieldGroup.CommitEvent commitEvent) throws FieldGroup.CommitException {
-                System.out.println("pre");
-            }
-
-            @Override
-            public void postCommit(FieldGroup.CommitEvent commitEvent) throws FieldGroup.CommitException {
-                reloadPrinter();
-                System.out.println("post");
-            }
-        });
-
-
-        contentPrinterName.setSizeFull();
-        printerNameForm = new PrinterNameForm(this);
-        gridPrinterName.setEditorEnabled(false);
-        gridPrinterName.setEditorBuffered(false);
-        contentPrinterName.addComponents(gridPrinterName, printerNameForm);
-        contentPrinterName.setExpandRatio(gridPrinterName, 1);
-
-        mainFrame.addComponents(contentPrinter, contentPrinterName);
+        final HorizontalLayout contentPrinter = addPrinterGrid();
+        final HorizontalLayout contentPrinterProjectAssociation = addPrinterProjectAssociationGrid();
+        mainFrame.addComponents(contentPrinter, contentPrinterProjectAssociation);
         setContent(mainFrame);
     }
 
-    private Grid loadDBtoGrid(SQLContainer table) throws SQLException{
 
-
-        log.info("Loading of tables.project database was successful.");
-        Grid grid = new Grid();
-        grid.setEditorEnabled(true);
-        grid.setEditorBuffered(true);
-        grid.isEditorActive();
-        grid.setContainerDataSource(table);
-        grid.setSizeFull();
-
-        return grid;
+    public void saveToPrinter(Printer entry){
+        List<String> entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only", "user_group");
+        List<String> values = Arrays.asList(entry.getName(), entry.getLocation(), entry.getUrl(), entry.getStatus().toString(),
+                entry.getType().toString(), entry.getIsAdmin(), entry.getUserGroup());
+        database.save(Table.labelprinter.toString(), entries, values, false);
     }
 
-    private void connectToDatabase(){
-        try {
-            database.connectToDatabase();
-            log.info("Connection to SQL tables.project database was successful.");
-        } catch (SQLException exp) {
-            log.error("Could not connect to SQL tables.project database. Reason: " + exp.getMessage());
-        }
-    }
+    public void saveToPrinterProjectAssociation(PrinterProjectAssociation entry) throws SQLException{
 
+        List<String> entries = Arrays.asList("printer_id", "project_id", "status");
 
-    /**
-     * Saves new printer_project_association entry
-     * @param entry new printer_project_association
-     */
-    public void savePrinterProjectAssociation(PrinterProjectAssociation entry){
-        database.save(tables.Table.printer_project_association.toString()," (printer_id, project_id, status) ", "(" + entry.getPrinterID()
-                + ", " + entry.getProjectID() + ", '" + entry.getStatus() + "')");
-    }
+        String selectPrinterId = Query.selectFromWhereAnd(Arrays.asList(PrinterFields.ID.toString()),
+                                                          Arrays.asList(Table.labelprinter.toString()),
+                                                          Arrays.asList(new Pair(PrinterFields.NAME.toString(), entry.getPrinterName()),
+                                                                        new Pair(PrinterFields.LOCATION.toString(), entry.getPrinterLocation())));
+        String selectProjectId = Query.selectFromWhereAnd(Arrays.asList(ProjectFields.ID.toString()),
+                                                          Arrays.asList(Table.projects.toString()),
+                                                          Arrays.asList(new Pair(ProjectFields.OPENBISID.toString(), entry.getProjectName())));
+        String selectPrinterStatus = Query.selectFromWhereAnd(Arrays.asList(PrinterFields.STATUS.toString()),
+                                                              Arrays.asList(Table.labelprinter.toString()),
+                                                              Arrays.asList(new Pair(PrinterFields.NAME.toString(), entry.getPrinterName()),
+                                                                            new Pair(PrinterFields.LOCATION.toString(), entry.getPrinterLocation())));
 
-    public void savePrinter(Printer entry){
-        database.save(Table.labelprinter.toString()," (name, location, url, status, type, admin_only, user_group) ", "('" + entry.getName()
-                + "', '" + entry.getLocation() +  "', '" + entry.getUrl() + "', '" + entry.getStatus() + "', '"  + entry.getType() + "', '"
-                + entry.getIsAdmin() + "', '" + entry.getUserGroup() + "')");
-    }
+        database.save(Table.printer_project_association.toString(), entries, Arrays.asList(
+                selectPrinterId,selectProjectId,selectPrinterStatus), true);
 
-    public void savePrinterName(PrinterName entry) throws SQLException{
-
-        if (entry == null) {
-            log.info("Entry is null.");
-            return;
-        }
-        Connection conn = null;
-        try {
-
-            conn = database.getPool().reserveConnection();
-
-            Statement statement = conn.createStatement();
-
-            String query = "INSERT INTO printer_project_association (printer_id, project_id, status) VALUES (" +
-                    "(SELECT labelprinter.id  FROM labelprinter WHERE labelprinter.name = '" + entry.getPrinterName() + "' AND labelprinter.location = '"+ entry.getPrinterLocation() +"' ),"+
-                    "(SELECT projects.id  FROM projects WHERE projects.openbis_project_identifier = '"+ entry.getProjectName() +"'),"+
-                    "(SELECT labelprinter.id  FROM labelprinter WHERE labelprinter.name = '"+entry.getPrinterName()+"' AND labelprinter.location = '"+entry.getPrinterLocation()+"'));";
-            System.out.println(query);
-            statement.executeUpdate(query);
-            statement.close();
-            conn.setAutoCommit(true);
-            conn.commit();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            database.getPool().releaseConnection(conn);
-        }
     }
 
     public void delete(String tableName, String id){
         database.delete(tableName, id);
     }
 
-    public void reloadPrinterProjectAssociation(){
-        gridPrinterProjectAsso.clearSortOrder();
-    }
-
-    public void reloadPrinter(){
-        gridPrinter.clearSortOrder();
-    }
-
-    public void reloadPrinterName(){
-        gridPrinterName.clearSortOrder();
+    public void reload(Table table){
+        if(table.toString().equals(Table.labelprinter.toString())){
+            gridPrinter.clearSortOrder();
+        }else if(table.toString().equals(Table.printer_project_association.toString())){
+            gridPrinterProjectAssociation.clearSortOrder();
+        }
     }
 
     public Database getDatabase() {
         return database;
+    }
+
+    private void connectToDatabase(){
+        this.database = new Database();
+        try {
+            this.database.connectToDatabase();
+            log.info("Connection to SQL database was successful.");
+        } catch (SQLException exp) {
+            log.error("Could not connect to SQL database. Reason: " + exp.getMessage());
+        }
+    }
+
+    private void setData() throws SQLException{
+
+        tableLabelprinter = database.loadCompleteTable(Table.labelprinter.toString(), "id");
+        gridPrinter = loadTableToGrid(tableLabelprinter);
+        gridPrinter.setEditorEnabled(true);
+        gridPrinter.setEditorBuffered(true);
+
+        List<String> printerProjectFields = Arrays.asList(PrinterProjectFields.ID.toString(),
+                PrinterProjectFields.PRINTER_ID.toString(),
+                PrinterFields.NAME.toString(),
+                PrinterFields.LOCATION.toString(),
+                PrinterProjectFields.PROJECT_ID.toString(),
+                ProjectFields.OPENBISID.toString(),
+                PrinterFields.STATUS.toString());
+
+        List<String> location = Arrays.asList(Table.printer_project_association.toString());
+
+        tablePrinterProjectAssociation = database.loadTableFromQuery(
+                Query.selectFrom(printerProjectFields, location) +
+                " " + Query.innerJoinOn(Table.labelprinter.toString(), PrinterProjectFields.PRINTER_ID.toString(), PrinterFields.ID.toString()) +
+                " " + Query.innerJoinOn(Table.projects.toString(), PrinterProjectFields.PROJECT_ID.toString(), ProjectFields.ID.toString()) +
+                " ORDER BY "+PrinterProjectFields.ID.toString() + ";");
+
+        gridPrinterProjectAssociation = loadTableToGrid(tablePrinterProjectAssociation);
+        gridPrinterProjectAssociation.setEditorEnabled(false);
+        gridPrinterProjectAssociation.setEditorBuffered(false);
+
+    }
+
+    private HorizontalLayout addPrinterGrid(){
+        HorizontalLayout contentPrinter = new HorizontalLayout();
+        contentPrinter.setSizeFull();
+        projectForm = new PrinterForm(this);
+        contentPrinter.addComponents(gridPrinter, projectForm);
+        contentPrinter.setExpandRatio(gridPrinter, 1);
+
+        //Collect edits in printer grid
+        gridPrinter.getEditorFieldGroup().addCommitHandler(new FieldGroup.CommitHandler() {
+            @Override
+            public void preCommit(FieldGroup.CommitEvent commitEvent) throws FieldGroup.CommitException {
+            }
+
+            @Override
+            public void postCommit(FieldGroup.CommitEvent commitEvent) throws FieldGroup.CommitException {
+                reload(Table.labelprinter);
+            }
+        });
+
+        return contentPrinter;
+
+    }
+
+    private HorizontalLayout addPrinterProjectAssociationGrid(){
+
+        final HorizontalLayout contentPrinterProjectAssociation = new HorizontalLayout();
+
+        contentPrinterProjectAssociation.setSizeFull();
+        printerProjectAssociationForm = new PrinterProjectAssociationForm(this);
+        contentPrinterProjectAssociation.addComponents(gridPrinterProjectAssociation, printerProjectAssociationForm);
+        contentPrinterProjectAssociation.setExpandRatio(gridPrinterProjectAssociation, 1);
+
+        return contentPrinterProjectAssociation;
+    }
+
+    private Grid loadTableToGrid(SQLContainer table) throws SQLException{
+
+        log.info("Loading of table from database was successful.");
+        Grid grid = new Grid();
+        grid.isEditorActive();
+        grid.setContainerDataSource(table);
+        grid.setSizeFull();
+
+        return grid;
     }
 }

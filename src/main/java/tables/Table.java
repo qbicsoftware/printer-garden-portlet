@@ -1,19 +1,18 @@
 package tables;
 
 public enum Table {
-    printer_project_association {
-        public String toString(){
-            return "printer_project_association";
-        }
-    },
-    labelprinter {
-        public String toString(){
-            return "labelprinter";
-        }
-    },
-    projects {
-        public String toString(){
-            return "projects";
-        }
+    printer_project_association("printer_project_association"),
+    labelprinter("labelprinter"),
+    projects("projects");
+
+    private String name;
+
+    Table(String name){
+        this.name = name;
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
     }
 }

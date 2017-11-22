@@ -1,111 +1,45 @@
 package tables.printerProjectAssociation;
 
-
-import tables.printer.PrinterStatus;
-
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class PrinterProjectAssociation implements Serializable, Cloneable {
 
 
-    private Long ID;
+    private String printerName = "";
+    private String printerLocation = "";
+    private String projectName = "";
 
-    private String printerID = "";
-
-    private String projectID = "";
-
-    private PrinterStatus status;
-
-    public Long getID() {
-        return ID;
+    PrinterProjectAssociation(String printerName, String printerLocation, String projectName) {
+        this.printerName = printerName;
+        this.printerLocation = printerLocation;
+        this.projectName = projectName;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public String getPrinterName() {
+        return printerName;
     }
 
+    public String getPrinterLocation() {
 
-    /**
-     * Get the value of status
-     *
-     * @return the value of status
-     */
-    public PrinterStatus getStatus() {
-        return status;
+        return printerLocation;
     }
 
-    /**
-     * Set the value of status
-     *
-     * @param status new value of status
-     */
-    public void setStatus(PrinterStatus status) {
-        this.status = status;
-    }
+    public String getProjectName() {
 
-
-    /**
-     * Get the value of printer_id
-     *
-     * @return the value of printer_id
-     */
-    public String getPrinterID() {
-        return printerID;
-    }
-
-    /**
-     * Set the value of printerID
-     *
-     * @param printerID new value of printerID
-     */
-    public void setPrinterID(String printerID) {
-        this.printerID = printerID;
-    }
-
-    /**
-     * Get the value of projectID
-     *
-     * @return the value of projectID
-     */
-    public String getProjectID() {
-        return projectID;
-    }
-
-    /**
-     * Set the value of projectID
-     *
-     * @param projectID new value of projectID
-     */
-    public void setProjectID(String projectID) {
-        this.projectID = projectID;
-    }
-
-    public boolean isPersisted() {
-        return ID != null;
+        return projectName;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (this.ID == null) {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        if (obj instanceof PrinterProjectAssociation && obj.getClass().equals(getClass())) {
-            return this.ID.equals(((PrinterProjectAssociation) obj).ID);
-        }
+        PrinterProjectAssociation that = (PrinterProjectAssociation) o;
 
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 43 * hash + (ID == null ? 0 : ID.hashCode());
-        return hash;
+        if (!printerName.equals(that.printerName)) return false;
+        if (!printerLocation.equals(that.printerLocation)) return false;
+        return projectName.equals(that.projectName);
     }
 
     @Override
@@ -115,7 +49,7 @@ public class PrinterProjectAssociation implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        return printerID + " " + projectID + " " + status;
+        return printerName + " " + printerLocation + " " + projectName;
     }
 }
 
