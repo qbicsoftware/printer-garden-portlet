@@ -80,13 +80,14 @@ public class MyPortletUI extends UI {
         String selectProjectId = Query.selectFromWhereAnd(Arrays.asList(ProjectFields.ID.toString()),
                                                           Arrays.asList(Table.projects.toString()),
                                                           Arrays.asList(new Pair(ProjectFields.OPENBISID.toString(), entry.getProjectName())));
-        String selectPrinterStatus = Query.selectFromWhereAnd(Arrays.asList(PrinterFields.STATUS.toString()),
+        //TODO ask andreas about status field: pot have to update form if is ppa attribute
+        String selectPrinterProjectStatus = Query.selectFromWhereAnd(Arrays.asList(PrinterFields.STATUS.toString()),
                                                               Arrays.asList(Table.labelprinter.toString()),
                                                               Arrays.asList(new Pair(PrinterFields.NAME.toString(), entry.getPrinterName()),
                                                                             new Pair(PrinterFields.LOCATION.toString(), entry.getPrinterLocation())));
 
         database.save(Table.printer_project_association.toString(), entries, Arrays.asList(
-                selectPrinterId,selectProjectId,selectPrinterStatus), true);
+                selectPrinterId,selectProjectId,selectPrinterProjectStatus), true);
 
     }
 
@@ -137,7 +138,7 @@ public class MyPortletUI extends UI {
                 Query.selectFrom(printerProjectFields, location) +
                 " " + Query.innerJoinOn(Table.labelprinter.toString(), PrinterProjectFields.PRINTER_ID.toString(), PrinterFields.ID.toString()) +
                 " " + Query.innerJoinOn(Table.projects.toString(), PrinterProjectFields.PROJECT_ID.toString(), ProjectFields.ID.toString()) +
-                " ORDER BY "+PrinterProjectFields.ID.toString() + ";");
+                " ORDER BY " + PrinterProjectFields.ID.toString() + ";");
 
         gridPrinterProjectAssociation = loadTableToGrid(tablePrinterProjectAssociation);
         gridPrinterProjectAssociation.setEditorEnabled(false);

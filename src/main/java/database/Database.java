@@ -57,7 +57,7 @@ public class Database {
             return;
         }
         String query = Query.deleteFromWhere(tableName, "id", rowId);
-        executeChangeQuery(query);
+        executeFreeQuery(query);
 
     }
 
@@ -72,11 +72,11 @@ public class Database {
         }else{
             query = Query.insertIntoSingleValues(tableName, entry, values).concat(";");
         }
-        executeChangeQuery(query);
+        executeFreeQuery(query);
     }
 
     //TODO find better name
-    private void executeChangeQuery(String query){
+    public void executeFreeQuery(String query){
         Connection conn = null;
         try {
 

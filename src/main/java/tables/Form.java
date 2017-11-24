@@ -10,7 +10,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import database.Query;
 import elemental.events.KeyboardEvent;
 import life.qbic.MyPortletUI;
-import tables.printer.PrinterFields;
+import tables.printerProjectAssociation.PrinterProjectFields;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -53,8 +53,8 @@ public abstract class Form<T> extends FormLayout {
         //Have to be distinct, they are a primary keys
         SQLContainer allExisIds = new SQLContainer(new FreeformQuery(
                 Query.selectFrom(Arrays.asList(table.toString()+ ".id"),
-                        Arrays.asList(table.toString()))+";"
-                , myUI.getDatabase().getPool()));
+                                            Arrays.asList(table.toString()))+";",
+                                            myUI.getDatabase().getPool()));
 
         rowID.addItem("");
         rowID.setContainerDataSource(allExisIds);
@@ -67,6 +67,13 @@ public abstract class Form<T> extends FormLayout {
         if(rowID == null || rowID.isEmpty()){
             System.out.println("Please enter information");
         }else {
+            if(table.equals(Table.labelprinter)){
+                String deletion = Query.deleteFromWhere(Table.printer_project_association.toString(),
+                                                        PrinterProjectFields.PRINTER_ID.toString(),
+                                                        rowID.getItem(rowID.getValue()).toString().split(":")[2]);
+                myUI.getDatabase().executeFreeQuery(deletion);
+                myUI.reload(Table.printer_project_association);
+            }
             myUI.delete(table.toString(), rowID.getItem(rowID.getValue()).toString().split(":")[2]);
             rowID.clear();
             myUI.reload(table);

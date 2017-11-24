@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class PrinterProjectAssociationForm extends Form{
 
     private ComboBox printerName = new ComboBox("Printer Name");
-    private ComboBox printerLocation = new ComboBox("Project Location");
+    private ComboBox printerLocation = new ComboBox("Printer Location");
     private ComboBox projectName = new ComboBox("Project Name");
 
     public PrinterProjectAssociationForm(MyPortletUI myUI) {
