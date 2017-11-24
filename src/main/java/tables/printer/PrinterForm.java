@@ -2,20 +2,21 @@ package tables.printer;
 
 import com.vaadin.ui.*;
 import life.qbic.MyPortletUI;
-import tables.Form;
+import tables.AForm;
+import tables.IForm;
 import tables.Table;
 
 
-public class PrinterForm extends Form{
+public class PrinterForm extends AForm implements IForm {
 
-    private TextField name = new TextField("Name");
-    private TextField location = new TextField("Location");
-    private TextField url = new TextField("URL");
-    private TextField userGroup = new TextField("User group");
+    private final TextField name = new TextField("Name");
+    private final TextField location = new TextField("Location");
+    private final TextField url = new TextField("URL");
+    private final TextField userGroup = new TextField("User group");
 
-    private ComboBox status = new ComboBox("Status");
-    private ComboBox type = new ComboBox("Type");
-    private CheckBox adminOnly = new CheckBox("Admin only");
+    private final ComboBox status = new ComboBox("Status");
+    private final ComboBox type = new ComboBox("Type");
+    private final CheckBox adminOnly = new CheckBox("Admin only");
 
 
     public PrinterForm(MyPortletUI myUI){
@@ -65,10 +66,9 @@ public class PrinterForm extends Form{
 
     @Override
     public Printer getFormEntries() {
-        Printer printer = new Printer(name.getValue(), location.getValue(), url.getValue(),
+        return new Printer(name.getValue(), location.getValue(), url.getValue(),
                 (PrinterStatus) status.getValue(), (PrinterType) type.getValue(), adminOnly.getValue(),
                 userGroup.getValue());
-        return printer;
     }
 
     @Override

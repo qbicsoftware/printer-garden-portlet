@@ -7,7 +7,7 @@ public enum ProjectFields {
     OPENBISID (Table.projects.toString() + ".openbis_project_identifier");
 
 
-    String name;
+    private final String name;
 
     ProjectFields(String name){
         this.name = name;

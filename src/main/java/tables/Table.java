@@ -5,7 +5,7 @@ public enum Table {
     labelprinter("labelprinter"),
     projects("projects");
 
-    private String name;
+    private final String name;
 
     Table(String name){
         this.name = name;

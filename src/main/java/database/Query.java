@@ -7,10 +7,6 @@ import java.util.stream.Collectors;
 
 public final class Query {
 
-    public  Query(){
-
-    }
-
     public static String selectFrom(List<String> entry, List<String> location){
         return "SELECT " + entry.stream()
                                 .collect(Collectors.joining(", "))

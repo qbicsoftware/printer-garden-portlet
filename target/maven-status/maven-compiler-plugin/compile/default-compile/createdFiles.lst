@@ -1,4 +1,3 @@
-tables/Form.class
 tables/printer/Printer.class
 tables/printer/PrinterForm.class
 life/qbic/MyPortletUI.class
@@ -7,9 +6,11 @@ database/Database.class
 database/Query.class
 tables/printer/PrinterStatus.class
 tables/Table.class
+tables/IForm.class
 tables/printer/PrinterFields.class
 tables/printerProjectAssociation/PrinterProjectFields.class
 tables/project/ProjectFields.class
 tables/printer/PrinterType.class
 life/qbic/MyPortletUI$1.class
+tables/AForm.class
 tables/printerProjectAssociation/PrinterProjectAssociation.class

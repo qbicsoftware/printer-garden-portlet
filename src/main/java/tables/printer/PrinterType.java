@@ -3,7 +3,7 @@ package tables.printer;
 public enum PrinterType {
     LABELPRINTER("LABEL PRINTER");
 
-    private String name;
+    private final String name;
     PrinterType(String name){
         this.name = name;
     }

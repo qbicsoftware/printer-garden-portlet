@@ -11,7 +11,7 @@ import com.vaadin.ui.*;
 import database.Database;
 import database.Query;
 import javafx.util.Pair;
-import tables.Form;
+import tables.AForm;
 import tables.printer.Printer;
 import tables.printer.PrinterFields;
 import tables.printer.PrinterForm;
@@ -23,6 +23,7 @@ import tables.project.ProjectFields;
 
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Theme("mytheme")
@@ -30,13 +31,7 @@ import java.util.List;
 @Widgetset("life.qbic.AppWidgetSet")
 public class MyPortletUI extends UI {
 
-    private static Log log = LogFactoryUtil.getLog(MyPortletUI.class.getName());
-
-    private Form projectForm;
-    private Form printerProjectAssociationForm;
-
-    private SQLContainer tableLabelprinter;
-    private SQLContainer tablePrinterProjectAssociation;
+    private static final Log log = LogFactoryUtil.getLog(MyPortletUI.class.getName());
 
     private Database database;
 
@@ -69,22 +64,22 @@ public class MyPortletUI extends UI {
         database.save(Table.labelprinter.toString(), entries, values, false);
     }
 
-    public void saveToPrinterProjectAssociation(PrinterProjectAssociation entry) throws SQLException{
+    public void saveToPrinterProjectAssociation(PrinterProjectAssociation entry){
 
         List<String> entries = Arrays.asList("printer_id", "project_id", "status");
 
-        String selectPrinterId = Query.selectFromWhereAnd(Arrays.asList(PrinterFields.ID.toString()),
-                                                          Arrays.asList(Table.labelprinter.toString()),
-                                                          Arrays.asList(new Pair(PrinterFields.NAME.toString(), entry.getPrinterName()),
-                                                                        new Pair(PrinterFields.LOCATION.toString(), entry.getPrinterLocation())));
-        String selectProjectId = Query.selectFromWhereAnd(Arrays.asList(ProjectFields.ID.toString()),
-                                                          Arrays.asList(Table.projects.toString()),
-                                                          Arrays.asList(new Pair(ProjectFields.OPENBISID.toString(), entry.getProjectName())));
+        String selectPrinterId = Query.selectFromWhereAnd(Collections.singletonList(PrinterFields.ID.toString()),
+                                                            Collections.singletonList(Table.labelprinter.toString()),
+                                                          Arrays.asList(new Pair<>(PrinterFields.NAME.toString(), entry.getPrinterName()),
+                                                                        new Pair<>(PrinterFields.LOCATION.toString(), entry.getPrinterLocation())));
+        String selectProjectId = Query.selectFromWhereAnd(Collections.singletonList(ProjectFields.ID.toString()),
+                                                            Collections.singletonList(Table.projects.toString()),
+                                                            Collections.singletonList(new Pair<>(ProjectFields.OPENBISID.toString(), entry.getProjectName())));
         //TODO ask andreas about status field: pot have to update form if is ppa attribute
-        String selectPrinterProjectStatus = Query.selectFromWhereAnd(Arrays.asList(PrinterFields.STATUS.toString()),
-                                                              Arrays.asList(Table.labelprinter.toString()),
-                                                              Arrays.asList(new Pair(PrinterFields.NAME.toString(), entry.getPrinterName()),
-                                                                            new Pair(PrinterFields.LOCATION.toString(), entry.getPrinterLocation())));
+        String selectPrinterProjectStatus = Query.selectFromWhereAnd(Collections.singletonList(PrinterFields.STATUS.toString()),
+                                                                        Collections.singletonList(Table.labelprinter.toString()),
+                                                              Arrays.asList(new Pair<>(PrinterFields.NAME.toString(), entry.getPrinterName()),
+                                                                            new Pair<>(PrinterFields.LOCATION.toString(), entry.getPrinterLocation())));
 
         database.save(Table.printer_project_association.toString(), entries, Arrays.asList(
                 selectPrinterId,selectProjectId,selectPrinterProjectStatus), true);
@@ -119,7 +114,7 @@ public class MyPortletUI extends UI {
 
     private void setData() throws SQLException{
 
-        tableLabelprinter = database.loadCompleteTable(Table.labelprinter.toString(), "id");
+        SQLContainer tableLabelprinter = database.loadCompleteTable(Table.labelprinter.toString(), "id");
         gridPrinter = loadTableToGrid(tableLabelprinter);
         gridPrinter.setEditorEnabled(true);
         gridPrinter.setEditorBuffered(true);
@@ -132,9 +127,9 @@ public class MyPortletUI extends UI {
                 ProjectFields.OPENBISID.toString(),
                 PrinterFields.STATUS.toString());
 
-        List<String> location = Arrays.asList(Table.printer_project_association.toString());
+        List<String> location = Collections.singletonList(Table.printer_project_association.toString());
 
-        tablePrinterProjectAssociation = database.loadTableFromQuery(
+        SQLContainer tablePrinterProjectAssociation = database.loadTableFromQuery(
                 Query.selectFrom(printerProjectFields, location) +
                 " " + Query.innerJoinOn(Table.labelprinter.toString(), PrinterProjectFields.PRINTER_ID.toString(), PrinterFields.ID.toString()) +
                 " " + Query.innerJoinOn(Table.projects.toString(), PrinterProjectFields.PROJECT_ID.toString(), ProjectFields.ID.toString()) +
@@ -149,7 +144,7 @@ public class MyPortletUI extends UI {
     private HorizontalLayout addPrinterGrid(){
         HorizontalLayout contentPrinter = new HorizontalLayout();
         contentPrinter.setSizeFull();
-        projectForm = new PrinterForm(this);
+        AForm projectForm = new PrinterForm(this);
         contentPrinter.addComponents(gridPrinter, projectForm);
         contentPrinter.setExpandRatio(gridPrinter, 1);
 
@@ -174,14 +169,14 @@ public class MyPortletUI extends UI {
         final HorizontalLayout contentPrinterProjectAssociation = new HorizontalLayout();
 
         contentPrinterProjectAssociation.setSizeFull();
-        printerProjectAssociationForm = new PrinterProjectAssociationForm(this);
+        AForm printerProjectAssociationForm = new PrinterProjectAssociationForm(this);
         contentPrinterProjectAssociation.addComponents(gridPrinterProjectAssociation, printerProjectAssociationForm);
         contentPrinterProjectAssociation.setExpandRatio(gridPrinterProjectAssociation, 1);
 
         return contentPrinterProjectAssociation;
     }
 
-    private Grid loadTableToGrid(SQLContainer table) throws SQLException{
+    private Grid loadTableToGrid(SQLContainer table){
 
         log.info("Loading of table from database was successful.");
         Grid grid = new Grid();

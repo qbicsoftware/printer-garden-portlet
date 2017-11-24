@@ -37,9 +37,7 @@ public class PrinterProjectAssociation implements Serializable, Cloneable {
 
         PrinterProjectAssociation that = (PrinterProjectAssociation) o;
 
-        if (!printerName.equals(that.printerName)) return false;
-        if (!printerLocation.equals(that.printerLocation)) return false;
-        return projectName.equals(that.projectName);
+        return printerName.equals(that.printerName) && printerLocation.equals(that.printerLocation) && projectName.equals(that.projectName);
     }
 
     @Override

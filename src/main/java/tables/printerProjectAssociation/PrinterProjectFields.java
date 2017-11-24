@@ -8,7 +8,7 @@ public enum PrinterProjectFields {
     PROJECT_ID(Table.printer_project_association + ".project_id"),
     STATUS(Table.printer_project_association + ".status");
 
-    String name;
+    private final String name;
     PrinterProjectFields(String name){
         this.name = name;
     }

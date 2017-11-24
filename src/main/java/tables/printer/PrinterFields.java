@@ -12,7 +12,7 @@ public enum PrinterFields {
     ADMIN_ONLY(Table.labelprinter.toString() + ".admin_only"),
     USER_GROUP(Table.labelprinter.toString() + ".user_group");
 
-    String name;
+    private final String name;
     PrinterFields(String name){
         this.name = name;
     }

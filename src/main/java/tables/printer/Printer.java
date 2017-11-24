@@ -12,9 +12,9 @@ public class Printer implements Serializable, Cloneable {
 
     private String url = "";
 
-    private PrinterStatus status;
+    private final PrinterStatus status;
 
-    private PrinterType type;
+    private final PrinterType type;
 
     private String isAdmin = "";
 
@@ -74,13 +74,13 @@ public class Printer implements Serializable, Cloneable {
 
         Printer printer = (Printer) o;
 
-        if (!name.equals(printer.name)) return false;
-        if (!location.equals(printer.location)) return false;
-        if (!url.equals(printer.url)) return false;
-        if (status != printer.status) return false;
-        if (type != printer.type) return false;
-        if (!isAdmin.equals(printer.isAdmin)) return false;
-        return userGroup.equals(printer.userGroup);
+        return name.equals(printer.name) &&
+                location.equals(printer.location) &&
+                url.equals(printer.url) &&
+                status == printer.status &&
+                type == printer.type &&
+                isAdmin.equals(printer.isAdmin) &&
+                userGroup.equals(printer.userGroup);
     }
 
     @Override

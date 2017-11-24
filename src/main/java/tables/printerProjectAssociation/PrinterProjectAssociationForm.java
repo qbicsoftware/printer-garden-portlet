@@ -5,19 +5,20 @@ import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.ui.*;
 import database.Query;
 import life.qbic.MyPortletUI;
-import tables.Form;
+import tables.AForm;
+import tables.IForm;
 import tables.Table;
 import tables.printer.PrinterFields;
 import tables.project.ProjectFields;
 
 import java.sql.SQLException;
-import java.util.Arrays;
+import java.util.Collections;
 
-public class PrinterProjectAssociationForm extends Form{
+public class PrinterProjectAssociationForm extends AForm implements IForm{
 
-    private ComboBox printerName = new ComboBox("Printer Name");
-    private ComboBox printerLocation = new ComboBox("Printer Location");
-    private ComboBox projectName = new ComboBox("Project Name");
+    private final ComboBox printerName = new ComboBox("Printer Name");
+    private final ComboBox printerLocation = new ComboBox("Printer Location");
+    private final ComboBox projectName = new ComboBox("Project Name");
 
     public PrinterProjectAssociationForm(MyPortletUI myUI) {
 
@@ -46,13 +47,12 @@ public class PrinterProjectAssociationForm extends Form{
 
     /**
      * Set valid ComboBox Selections from Table entries
-     * @throws SQLException
      */
 
     private void setExistingPrinterNames() throws SQLException{
         SQLContainer allExisPrinterNames = new SQLContainer(new FreeformQuery(
-                Query.selectDistinctFrom(Arrays.asList(PrinterFields.NAME.toString()),
-                                                    Arrays.asList(Table.labelprinter.toString()))+";"
+                Query.selectDistinctFrom(Collections.singletonList(PrinterFields.NAME.toString()),
+                                                    Collections.singletonList(Table.labelprinter.toString()))+";"
                 , myUI.getDatabase().getPool()));
         printerName.addItem("");
         printerName.setContainerDataSource(allExisPrinterNames);
@@ -63,8 +63,8 @@ public class PrinterProjectAssociationForm extends Form{
 
     private void setExistingPrinterLocations() throws SQLException{
         SQLContainer allExisPrinterLocations = new SQLContainer(new FreeformQuery(
-                Query.selectDistinctFrom(Arrays.asList(PrinterFields.LOCATION.toString()),
-                        Arrays.asList(Table.labelprinter.toString()))+";"
+                Query.selectDistinctFrom(Collections.singletonList(PrinterFields.LOCATION.toString()),
+                        Collections.singletonList(Table.labelprinter.toString()))+";"
                 , myUI.getDatabase().getPool()));
         printerLocation.addItem("");
         printerLocation.setContainerDataSource(allExisPrinterLocations);
@@ -76,8 +76,8 @@ public class PrinterProjectAssociationForm extends Form{
 
     private void setExistingOpenBisProjectNames() throws SQLException{
         SQLContainer allExisProjectNames = new SQLContainer(new FreeformQuery(
-                Query.selectDistinctFrom(Arrays.asList(ProjectFields.OPENBISID.toString()),
-                        Arrays.asList(Table.projects.toString()))+";"
+                Query.selectDistinctFrom(Collections.singletonList(ProjectFields.OPENBISID.toString()),
+                        Collections.singletonList(Table.projects.toString()))+";"
                 , myUI.getDatabase().getPool()));
         projectName.addItem("");
         projectName.setCaption("Project Name");
@@ -95,11 +95,8 @@ public class PrinterProjectAssociationForm extends Form{
         if (printerName == null || printerLocation == null || projectName.isEmpty()) {
             System.out.println("Please enter information here");
         }else{
-            try{
-                myUI.saveToPrinterProjectAssociation(getFormEntries());
-            }catch(SQLException e){
-                e.printStackTrace();
-            }
+
+            myUI.saveToPrinterProjectAssociation(getFormEntries());
             emptyForm();
             myUI.reload(this.table);
         }

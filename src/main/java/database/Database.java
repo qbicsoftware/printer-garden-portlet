@@ -20,10 +20,10 @@ public class Database {
     private final String connectionURI = "jdbc:mysql://portal-testing.am10.uni-tuebingen.de:3306/qbic_usermanagement_db";
 
     private JDBCConnectionPool pool;
-    private String user;
-    private String password;
+    private final String user;
+    private final String password;
 
-    private static Log log = LogFactoryUtil.getLog(Database.class.getName());
+    private static final Log log = LogFactoryUtil.getLog(Database.class.getName());
 
     public Database() {
         user = "mariadbuser";
@@ -66,7 +66,7 @@ public class Database {
             log.info("Entry is null.");
             return;
         }
-        String query = "";
+        String query;
         if(isStatement){
             query = Query.insertIntoStatementValues(tableName, entry, values).concat(";");
         }else{
@@ -75,7 +75,6 @@ public class Database {
         executeFreeQuery(query);
     }
 
-    //TODO find better name
     public void executeFreeQuery(String query){
         Connection conn = null;
         try {
