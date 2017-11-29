@@ -46,7 +46,6 @@ public class PrinterForm extends AForm implements IForm {
         type.setValue(PrinterType.LABELPRINTER);
 
         adminOnly.setValue(false);
-
     }
 
     //TODO put below in logic class
@@ -54,7 +53,7 @@ public class PrinterForm extends AForm implements IForm {
     public void saveEntry() {
 
         if (name == null || location == null || url == null || status == null || type == null || adminOnly == null || userGroup == null
-                || name.isEmpty() || location.isEmpty() || url.isEmpty() || userGroup.isEmpty()) {
+                || name.isEmpty() || location.isEmpty() || url.isEmpty()) {
             System.out.println("Please enter information !");
         }else{
 

@@ -19,9 +19,11 @@ import tables.printerProjectAssociation.PrinterProjectAssociation;
 import tables.printerProjectAssociation.PrinterProjectAssociationForm;
 import tables.Table;
 import tables.printerProjectAssociation.PrinterProjectFields;
+import tables.printerProjectAssociation.PrinterProjectStatus;
 import tables.project.ProjectFields;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -58,10 +60,19 @@ public class MyPortletUI extends UI {
 
 
     public void saveToPrinter(Printer entry){
-        List<String> entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only", "user_group");
-        List<String> values = Arrays.asList(entry.getName(), entry.getLocation(), entry.getUrl(), entry.getStatus().toString(),
-                entry.getType().toString(), entry.getIsAdmin(), entry.getUserGroup());
+        List<String> entries;
+        List<String> values;
+        if(entry.getUserGroup().isEmpty()){
+            entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only");
+            values = Arrays.asList("'"+entry.getName()+"'", "'"+entry.getLocation()+"'", "'"+entry.getUrl()+"'", "'"+entry.getStatus().toString()+"'",
+                    "'"+entry.getType().toString()+"'", "'"+entry.getIsAdmin()+"'");
+        }else {
+            entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only", "user_group");
+            values = Arrays.asList("'" + entry.getName() + "'", "'" + entry.getLocation(), "'" + entry.getUrl() + "'", "'" + entry.getStatus().toString() + "'",
+                    "'" + entry.getType().toString() + "'", "'" + entry.getIsAdmin() + "'", "'" + entry.getUserGroup() + "'");
+        }
         database.save(Table.labelprinter.toString(), entries, values, false);
+
     }
 
     public void saveToPrinterProjectAssociation(PrinterProjectAssociation entry){
@@ -75,14 +86,9 @@ public class MyPortletUI extends UI {
         String selectProjectId = Query.selectFromWhereAnd(Collections.singletonList(ProjectFields.ID.toString()),
                                                             Collections.singletonList(Table.projects.toString()),
                                                             Collections.singletonList(new Pair<>(ProjectFields.OPENBISID.toString(), entry.getProjectName())));
-        //TODO ask andreas about status field: pot have to update form if is ppa attribute
-        String selectPrinterProjectStatus = Query.selectFromWhereAnd(Collections.singletonList(PrinterFields.STATUS.toString()),
-                                                                        Collections.singletonList(Table.labelprinter.toString()),
-                                                              Arrays.asList(new Pair<>(PrinterFields.NAME.toString(), entry.getPrinterName()),
-                                                                            new Pair<>(PrinterFields.LOCATION.toString(), entry.getPrinterLocation())));
 
         database.save(Table.printer_project_association.toString(), entries, Arrays.asList(
-                selectPrinterId,selectProjectId,selectPrinterProjectStatus), true);
+                "(" +selectPrinterId+")","(" +selectProjectId+")", "'"+entry.getStatus().toString() +"'"), false);
 
     }
 
@@ -125,7 +131,7 @@ public class MyPortletUI extends UI {
                 PrinterFields.LOCATION.toString(),
                 PrinterProjectFields.PROJECT_ID.toString(),
                 ProjectFields.OPENBISID.toString(),
-                PrinterFields.STATUS.toString());
+                PrinterProjectFields.STATUS.toString());
 
         List<String> location = Collections.singletonList(Table.printer_project_association.toString());
 

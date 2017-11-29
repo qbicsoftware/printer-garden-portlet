@@ -1,5 +1,7 @@
 package tables.printerProjectAssociation;
 
+import tables.printer.Printer;
+
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
@@ -9,11 +11,13 @@ public class PrinterProjectAssociation implements Serializable, Cloneable {
     private String printerName = "";
     private String printerLocation = "";
     private String projectName = "";
+    private PrinterProjectStatus status;
 
-    PrinterProjectAssociation(String printerName, String printerLocation, String projectName) {
+    PrinterProjectAssociation(String printerName, String printerLocation, String projectName, PrinterProjectStatus status) {
         this.printerName = printerName;
         this.printerLocation = printerLocation;
         this.projectName = projectName;
+        this.status = status;
     }
 
     public String getPrinterName() {
@@ -30,6 +34,10 @@ public class PrinterProjectAssociation implements Serializable, Cloneable {
         return projectName;
     }
 
+    public PrinterProjectStatus getStatus(){
+        return status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,7 +45,8 @@ public class PrinterProjectAssociation implements Serializable, Cloneable {
 
         PrinterProjectAssociation that = (PrinterProjectAssociation) o;
 
-        return printerName.equals(that.printerName) && printerLocation.equals(that.printerLocation) && projectName.equals(that.projectName);
+        return printerName.equals(that.printerName) && printerLocation.equals(that.printerLocation) && projectName.equals(that.projectName)
+                && status.equals(that.status);
     }
 
     @Override
@@ -47,7 +56,7 @@ public class PrinterProjectAssociation implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        return printerName + " " + printerLocation + " " + projectName;
+        return printerName + " " + printerLocation + " " + projectName + " " + status;
     }
 }
 

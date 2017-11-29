@@ -1,7 +1,8 @@
 package tables.printer;
 
 public enum PrinterType {
-    LABELPRINTER("LABEL PRINTER");
+    LABELPRINTER("LABEL PRINTER"),
+    A4_PRINTER("A4 PRINTER");
 
     private final String name;
     PrinterType(String name){

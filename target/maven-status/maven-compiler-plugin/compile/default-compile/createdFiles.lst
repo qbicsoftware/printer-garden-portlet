@@ -1,3 +1,4 @@
+tables/printerProjectAssociation/PrinterProjectStatus.class
 tables/printer/Printer.class
 tables/printer/PrinterForm.class
 life/qbic/MyPortletUI.class
@@ -8,6 +9,7 @@ tables/printer/PrinterStatus.class
 tables/Table.class
 tables/IForm.class
 tables/printer/PrinterFields.class
+tables/printerProjectAssociation/MyContainer.class
 tables/printerProjectAssociation/PrinterProjectFields.class
 tables/project/ProjectFields.class
 tables/printer/PrinterType.class

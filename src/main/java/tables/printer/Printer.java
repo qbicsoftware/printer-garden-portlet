@@ -30,6 +30,7 @@ public class Printer implements Serializable, Cloneable {
         this.userGroup = userGroup;
 
     }
+
     public String getName() {
         return name;
     }
