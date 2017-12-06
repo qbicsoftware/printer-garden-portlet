@@ -2,39 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08685bee-2679-4140-904a-83a21cd42358" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/MyContainer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/database/Database.class" afterPath="$PROJECT_DIR$/target/classes/database/Database.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/database/Query.class" afterPath="$PROJECT_DIR$/target/classes/database/Query.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/life/qbic/MyPortletUI$1.class" afterPath="$PROJECT_DIR$/target/classes/life/qbic/MyPortletUI$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/life/qbic/MyPortletUI.class" afterPath="$PROJECT_DIR$/target/classes/life/qbic/MyPortletUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tables/AForm.class" afterPath="$PROJECT_DIR$/target/classes/tables/AForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tables/printer/Printer.class" afterPath="$PROJECT_DIR$/target/classes/tables/printer/Printer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tables/printer/PrinterForm.class" afterPath="$PROJECT_DIR$/target/classes/tables/printer/PrinterForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tables/printer/PrinterType.class" afterPath="$PROJECT_DIR$/target/classes/tables/printer/PrinterType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tables/printerProjectAssociation/PrinterProjectAssociation.class" afterPath="$PROJECT_DIR$/target/classes/tables/printerProjectAssociation/PrinterProjectAssociation.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/tables/printerProjectAssociation/PrinterProjectAssociationForm.class" afterPath="$PROJECT_DIR$/target/classes/tables/printerProjectAssociation/PrinterProjectAssociationForm.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0.war" afterPath="$PROJECT_DIR$/target/portlet-base-1.0.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/database/Database.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/database/Database.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/database/Query.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/database/Query.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/life/qbic/MyPortletUI$1.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/life/qbic/MyPortletUI$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/life/qbic/MyPortletUI.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/life/qbic/MyPortletUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/AForm.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/AForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printer/Printer.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printer/Printer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printer/PrinterForm.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printer/PrinterForm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printer/PrinterType.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printer/PrinterType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printerProjectAssociation/PrinterProjectAssociation.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printerProjectAssociation/PrinterProjectAssociation.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printerProjectAssociation/PrinterProjectAssociationForm.class" afterPath="$PROJECT_DIR$/target/portlet-base-1.0/WEB-INF/classes/tables/printerProjectAssociation/PrinterProjectAssociationForm.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/database/Query.java" afterPath="$PROJECT_DIR$/src/main/java/database/Query.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/life/qbic/MyPortletUI.java" afterPath="$PROJECT_DIR$/src/main/java/life/qbic/MyPortletUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tables/printer/Printer.java" afterPath="$PROJECT_DIR$/src/main/java/tables/printer/Printer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tables/printer/PrinterForm.java" afterPath="$PROJECT_DIR$/src/main/java/tables/printer/PrinterForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tables/printer/PrinterType.java" afterPath="$PROJECT_DIR$/src/main/java/tables/printer/PrinterType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociation.java" afterPath="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociationForm.java" afterPath="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociationForm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,25 +27,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PrinterProjectFields.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectFields.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PrinterType.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterType.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-              <folding>
-                <element signature="e#176#177#0" expanded="true" />
-                <element signature="e#208#209#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -72,10 +40,26 @@
       <file leaf-file-name="PrinterProjectAssociation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="-3">
               <caret line="13" column="39" lean-forward="false" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyPortletUI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/life/qbic/MyPortletUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-580">
+              <caret line="68" column="36" lean-forward="false" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="36" />
+              <folding>
+                <element signature="method#saveToPrinterProjectAssociation#0;class#MyPortletUI#0" expanded="false" />
+                <element signature="method#reload#0;class#MyPortletUI#0" expanded="false" />
+                <element signature="method#connectToDatabase#0;class#MyPortletUI#0" expanded="false" />
+                <element signature="method#setData#0;class#MyPortletUI#0" expanded="false" />
+                <element signature="method#loadTableToGrid#0;class#MyPortletUI#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,24 +75,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Query.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/database/Query.java">
+      <file leaf-file-name="PrinterForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="45" column="81" lean-forward="false" selection-start-line="45" selection-start-column="81" selection-end-line="45" selection-end-column="81" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="1060">
+              <caret line="84" column="5" lean-forward="false" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PrinterForm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterForm.java">
+      <file leaf-file-name="Printer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/Printer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="47" column="34" lean-forward="false" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
-              <folding />
+            <state relative-caret-position="98">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding>
+                <element signature="method#Printer#0;class#Printer#0" expanded="false" />
+                <element signature="method#setIsAdmin#0;class#Printer#0" expanded="false" />
+                <element signature="method#hashCode#0;class#Printer#0" expanded="false" />
+                <element signature="method#clone#0;class#Printer#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -123,24 +110,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PrinterProjectStatus.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectStatus.java">
+      <file leaf-file-name="IForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tables/IForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+            <state relative-caret-position="30">
+              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrinterProjectAssociationForm.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociationForm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="76" column="74" lean-forward="false" selection-start-line="76" selection-start-column="74" selection-end-line="76" selection-end-column="74" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -151,13 +126,19 @@
             <state relative-caret-position="165">
               <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
               <folding>
-                <element signature="e#235#236#0" expanded="true" />
-                <element signature="e#275#276#0" expanded="true" />
                 <element signature="e#315#316#0" expanded="true" />
                 <element signature="e#347#348#0" expanded="true" />
-                <element signature="e#379#380#0" expanded="true" />
-                <element signature="e#423#424#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Table.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tables/Table.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -231,12 +212,12 @@
         <option value="$PROJECT_DIR$/src/main/java/tables/printer/Printer.java" />
         <option value="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectStatus.java" />
         <option value="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/database/Query.java" />
         <option value="$PROJECT_DIR$/src/main/java/tables/printer/PrinterType.java" />
         <option value="$PROJECT_DIR$/src/main/java/tables/printer/PrinterForm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/life/qbic/MyPortletUI.java" />
         <option value="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/MyContainer.java" />
         <option value="$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociationForm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/database/Query.java" />
+        <option value="$PROJECT_DIR$/src/main/java/life/qbic/MyPortletUI.java" />
       </list>
     </option>
   </component>
@@ -295,6 +276,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -367,7 +349,6 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -549,7 +530,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -563,7 +543,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32737276" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28836834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28836834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14638783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -682,7 +663,11 @@
         <state relative-caret-position="1125">
           <caret line="75" column="78" lean-forward="false" selection-start-line="75" selection-start-column="78" selection-end-line="75" selection-end-column="78" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="method#saveToPrinterProjectAssociation#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#reload#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#connectToDatabase#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#setData#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#loadTableToGrid#0;class#MyPortletUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -733,7 +718,11 @@
         <state relative-caret-position="1125">
           <caret line="75" column="78" lean-forward="false" selection-start-line="75" selection-start-column="78" selection-end-line="75" selection-end-column="78" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="method#saveToPrinterProjectAssociation#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#reload#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#connectToDatabase#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#setData#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#loadTableToGrid#0;class#MyPortletUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -796,56 +785,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/IForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/portlet.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/AForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/Printer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="method#Printer#0;class#Printer#0" expanded="false" />
-            <element signature="method#setIsAdmin#0;class#Printer#0" expanded="false" />
-            <element signature="method#equals#0;class#Printer#0" expanded="false" />
-            <element signature="method#hashCode#0;class#Printer#0" expanded="false" />
-            <element signature="method#clone#0;class#Printer#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/life/qbic/MyPortletUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="88" column="8" lean-forward="false" selection-start-line="88" selection-start-column="8" selection-end-line="88" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -875,11 +818,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterStatus.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociationForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="16" column="1" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="16" selection-end-column="1" />
+        <state relative-caret-position="-1069">
+          <caret line="19" column="74" lean-forward="false" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/Query.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/AForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/IForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/Printer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="method#Printer#0;class#Printer#0" expanded="false" />
+            <element signature="method#setIsAdmin#0;class#Printer#0" expanded="false" />
+            <element signature="method#hashCode#0;class#Printer#0" expanded="false" />
+            <element signature="method#clone#0;class#Printer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -891,20 +885,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="39" lean-forward="false" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="180">
+          <caret line="16" column="1" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="16" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterForm.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="47" column="34" lean-forward="false" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
+        <state relative-caret-position="30">
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -914,43 +906,40 @@
         <state relative-caret-position="165">
           <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
           <folding>
-            <element signature="e#235#236#0" expanded="true" />
-            <element signature="e#275#276#0" expanded="true" />
             <element signature="e#315#316#0" expanded="true" />
             <element signature="e#347#348#0" expanded="true" />
-            <element signature="e#379#380#0" expanded="true" />
-            <element signature="e#423#424#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/database/Query.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="45" column="81" lean-forward="false" selection-start-line="45" selection-start-column="81" selection-end-line="45" selection-end-column="81" />
+        <state relative-caret-position="-3">
+          <caret line="13" column="39" lean-forward="false" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterType.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printer/PrinterForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding>
-            <element signature="e#176#177#0" expanded="true" />
-            <element signature="e#208#209#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1060">
+          <caret line="84" column="5" lean-forward="false" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tables/printerProjectAssociation/PrinterProjectAssociationForm.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/life/qbic/MyPortletUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="76" column="74" lean-forward="false" selection-start-line="76" selection-start-column="74" selection-end-line="76" selection-end-column="74" />
+        <state relative-caret-position="-580">
+          <caret line="68" column="36" lean-forward="false" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="36" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#saveToPrinterProjectAssociation#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#reload#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#connectToDatabase#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#setData#0;class#MyPortletUI#0" expanded="false" />
+            <element signature="method#loadTableToGrid#0;class#MyPortletUI#0" expanded="false" />
           </folding>
         </state>
       </provider>

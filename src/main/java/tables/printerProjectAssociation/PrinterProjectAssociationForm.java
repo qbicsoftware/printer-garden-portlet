@@ -19,7 +19,7 @@ import java.util.Collections;
 
 public class PrinterProjectAssociationForm extends AForm implements IForm{
 
-    private final ComboBox printerNameLocation = new ComboBox("Printer Name");
+    private final ComboBox printerNameLocation = new ComboBox("Printer");
     private final ComboBox projectName = new ComboBox("Project Name");
     private final ComboBox status = new ComboBox("Status");
 
@@ -63,6 +63,8 @@ public class PrinterProjectAssociationForm extends AForm implements IForm{
         printerNameLocation.setItemCaptionMode(AbstractSelect.ItemCaptionMode.ITEM);
         printerNameLocation.setItemCaption(0,"name, location");
         printerNameLocation.setNullSelectionAllowed(false);
+        printerNameLocation.setFilteringMode(FilteringMode.CONTAINS);
+
     }
 
 

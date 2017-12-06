@@ -43,6 +43,10 @@ public class MyPortletUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
 
+        OptionGroup single = new OptionGroup("Select:");
+        single.addItems("Printer", "Printer Project Associations");
+
+
         final VerticalLayout mainFrame = new VerticalLayout();
         connectToDatabase();
 
@@ -52,10 +56,26 @@ public class MyPortletUI extends UI {
             e.printStackTrace();
         }
 
-        final HorizontalLayout contentPrinter = addPrinterGrid();
-        final HorizontalLayout contentPrinterProjectAssociation = addPrinterProjectAssociationGrid();
-        mainFrame.addComponents(contentPrinter, contentPrinterProjectAssociation);
+
+        mainFrame.addComponent(single);
         setContent(mainFrame);
+        single.addValueChangeListener(valueChangeEvent -> {
+            if (single.getValue().equals("Printer")) {
+                final VerticalLayout contentPrinter = addPrinterGrid();
+                mainFrame.removeAllComponents();
+                mainFrame.addComponents(single, contentPrinter);
+                setContent(mainFrame);
+            }else if(single.getValue().equals("Printer Project Associations")){
+                final VerticalLayout contentPrinterProjectAssociation = addPrinterProjectAssociationGrid();
+                mainFrame.removeAllComponents();
+                mainFrame.addComponents(single, contentPrinterProjectAssociation);
+                setContent(mainFrame);
+            }
+            System.out.println(single.getValue());
+        });
+
+
+        System.out.println(single.getValue());
     }
 
 
@@ -68,7 +88,7 @@ public class MyPortletUI extends UI {
                     "'"+entry.getType().toString()+"'", "'"+entry.getIsAdmin()+"'");
         }else {
             entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only", "user_group");
-            values = Arrays.asList("'" + entry.getName() + "'", "'" + entry.getLocation(), "'" + entry.getUrl() + "'", "'" + entry.getStatus().toString() + "'",
+            values = Arrays.asList("'" + entry.getName() + "'", "'" + entry.getLocation() + "'", "'" + entry.getUrl() + "'", "'" + entry.getStatus().toString() + "'",
                     "'" + entry.getType().toString() + "'", "'" + entry.getIsAdmin() + "'", "'" + entry.getUserGroup() + "'");
         }
         database.save(Table.labelprinter.toString(), entries, values, false);
@@ -147,8 +167,8 @@ public class MyPortletUI extends UI {
 
     }
 
-    private HorizontalLayout addPrinterGrid(){
-        HorizontalLayout contentPrinter = new HorizontalLayout();
+    private VerticalLayout addPrinterGrid(){
+        VerticalLayout contentPrinter = new VerticalLayout();
         contentPrinter.setSizeFull();
         AForm projectForm = new PrinterForm(this);
         contentPrinter.addComponents(gridPrinter, projectForm);
@@ -170,9 +190,9 @@ public class MyPortletUI extends UI {
 
     }
 
-    private HorizontalLayout addPrinterProjectAssociationGrid(){
+    private VerticalLayout addPrinterProjectAssociationGrid(){
 
-        final HorizontalLayout contentPrinterProjectAssociation = new HorizontalLayout();
+        final VerticalLayout contentPrinterProjectAssociation = new VerticalLayout();
 
         contentPrinterProjectAssociation.setSizeFull();
         AForm printerProjectAssociationForm = new PrinterProjectAssociationForm(this);
