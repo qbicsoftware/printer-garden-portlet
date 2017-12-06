@@ -207,7 +207,7 @@
 						MB disk -->
 					<compileReport>false</compileReport>
 					<noServer>true</noServer>
-					<!-- Remove draftCompile when tables.project is ready -->
+					<!-- Remove draftCompile when model.database.tables.project is ready -->
 					<draftCompile>false</draftCompile>
 
 					<style>OBF</style>

@@ -1,1 +1,1 @@
-Maintaining and updating tables.printer tables.project associations and label tables.printer locations
+Maintaining and updating model.database.tables.printer model.database.tables.project associations and label model.database.tables.printer locations
