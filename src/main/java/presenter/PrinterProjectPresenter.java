@@ -14,12 +14,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class PrinterProjectPresenter {
+class PrinterProjectPresenter {
 
     private final PrinterProjectFormView form;
     private final Database database;
     private final Grid grid;
-    public PrinterProjectPresenter(PrinterProjectFormView form, Database database, Grid grid){
+    PrinterProjectPresenter(PrinterProjectFormView form, Database database, Grid grid){
         this.form = form;
         this.database = database;
         this.grid = grid;
@@ -30,7 +30,6 @@ public class PrinterProjectPresenter {
     private void setUpListener(){
         saveButtonListener();
         deleteButtonListener();
-
 
     }
 

@@ -75,13 +75,12 @@ public class Database {
         executeFreeQuery(query);
     }
 
-    public void executeFreeQuery(String query){
+    private void executeFreeQuery(String query){
         Connection conn = null;
         try {
 
             conn = pool.reserveConnection();
             Statement statement = conn.createStatement();
-            System.out.println(query);
 
             statement.executeUpdate(query);
             statement.close();

@@ -123,8 +123,6 @@ public class MainPresenter {
         grid.clearSortOrder();
     }
 
-
-    //TODO maybe model instead?
     private Grid getPrinterGrid(){
         Grid printerGrid = new Grid();
         try {
@@ -139,7 +137,6 @@ public class MainPresenter {
         return printerGrid;
     }
 
-    //TODO maybe model instead?
     private Grid getPrinterProjectGrid(){
         Grid printerProjectAssociationGrid = new Grid();
         List<String> printerProjectFields = Arrays.asList(PrinterProjectFields.ID.toString(),
@@ -169,7 +166,6 @@ public class MainPresenter {
 
     }
 
-    //TODO maybe model instead?
     private Grid loadTableToGrid(SQLContainer table){
 
         log.info("Loading of table from Database was successful.");

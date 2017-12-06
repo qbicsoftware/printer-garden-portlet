@@ -9,13 +9,13 @@ import view.forms.PrinterFormView;
 import java.util.Arrays;
 import java.util.List;
 
-public class PrinterPresenter {
+class PrinterPresenter {
 
     private final PrinterFormView form;
     private final Database database;
     private final Grid grid;
 
-    public PrinterPresenter(PrinterFormView form, Database database, Grid grid) {
+    PrinterPresenter(PrinterFormView form, Database database, Grid grid) {
         this.form = form;
         this.database = database;
         this.grid = grid;

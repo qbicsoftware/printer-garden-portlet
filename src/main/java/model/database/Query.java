@@ -42,14 +42,11 @@ public final class Query {
     }
 
     public static String insertIntoSingleValues(String tablename, List<String> entry, List<String> values){
-        System.out.println("here");
-        System.out.println(values);
         return "INSERT INTO " + tablename + " (" + entry.stream().collect(Collectors.joining(", ")) + ") " +
                 "VALUES (" + values.stream().collect(Collectors.joining(", ")) +")";
     }
 
     public static String insertIntoStatementValues(String tablename, List<String> entry, List<String> values){
-        System.out.println("or here");
         return "INSERT INTO " + tablename + " (" + entry.stream().collect(Collectors.joining(", ")) + ") " +
                 "VALUES ((" + values.stream().collect(Collectors.joining("), (")) +"))";
     }

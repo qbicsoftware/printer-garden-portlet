@@ -38,14 +38,11 @@ public class PrinterProjectFormView extends AFormView implements IFormView {
 
     @Override
     public void specifyComponents() {
-        try {
+
             setExistingPrinterNameLocationCombinations();
             setExistingOpenBisProjectNames();
             setStatus();
 
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -74,7 +71,7 @@ public class PrinterProjectFormView extends AFormView implements IFormView {
 
     }
 
-    private void setStatus() throws SQLException{
+    private void setStatus(){
         for(PrinterProjectStatus p : PrinterProjectStatus.values()){
             status.addItem(p);
         }
@@ -99,7 +96,7 @@ public class PrinterProjectFormView extends AFormView implements IFormView {
     public void emptyForm(){
         printerNameLocation.clear();
         projectName.clear();
-        getRowID();
+        getRowID().clear();
     }
 
     public ComboBox getPrinterNameLocation() {

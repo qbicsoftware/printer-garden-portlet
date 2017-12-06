@@ -1,0 +1,4 @@
+ - alert when no information is given
+ - what to do when db connection fails? also alert?
+ - check presenter classes again for abstract or splitting up or so
+ - same for form classes

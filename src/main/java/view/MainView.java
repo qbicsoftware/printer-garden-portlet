@@ -42,7 +42,6 @@ public class MainView {
     }
 
     private void setRootFrame(VerticalLayout content){
-        //TODO maybe adjust this a bit, play around with diff layouts, not too important as of now
         rootFrame.removeAllComponents();
         VerticalLayout layout = new VerticalLayout();
         layout.addComponents(selection,content);

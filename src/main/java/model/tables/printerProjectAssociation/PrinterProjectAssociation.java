@@ -9,7 +9,7 @@ public class PrinterProjectAssociation implements Serializable, Cloneable {
     private String printerName = "";
     private String printerLocation = "";
     private String projectName = "";
-    private PrinterProjectStatus status;
+    private final PrinterProjectStatus status;
 
     public PrinterProjectAssociation(String printerName, String printerLocation, String projectName, PrinterProjectStatus status) {
         this.printerName = printerName;

@@ -18,7 +18,7 @@ public class AFormView extends FormLayout{
     private final Button deleteButton = new Button("Delete");
     private final ComboBox rowID = new ComboBox("ID");
 
-    public AFormView(MyPortletUI ui, SQLContainer ids) throws SQLException{
+    AFormView(MyPortletUI ui, SQLContainer ids) throws SQLException{
         super();
         this.ui = ui;
 
@@ -41,7 +41,7 @@ public class AFormView extends FormLayout{
         return deleteButton;
     }
 
-    private void setExistingIDs(SQLContainer allExisIds) throws SQLException {
+    private void setExistingIDs(SQLContainer allExisIds){
 
         rowID.addItem("");
         rowID.setContainerDataSource(allExisIds);

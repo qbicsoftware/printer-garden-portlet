@@ -1,6 +1,6 @@
 package view.forms;
 
-public interface IFormView <T> {
+interface IFormView <T> {
 
     void specifyComponents();
 
