@@ -1,9 +1,9 @@
 package model.database;
 
-import javafx.util.Pair;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.javatuples.Pair;
 
 public final class Query {
 
@@ -23,7 +23,7 @@ public final class Query {
         String where = "";
         int condCounter = 0;
         for (Pair<String, String> c: condition) {
-            where = where.concat(c.getKey().concat(" = '").concat(c.getValue()).concat("'"));
+            where = where.concat(c.getValue0().concat(" = '").concat(c.getValue1()).concat("'"));
             if(condCounter < condition.size() - 1){
                 where += " AND ";
             }

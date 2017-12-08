@@ -1,13 +1,13 @@
 package presenter;
 
 import com.vaadin.ui.Grid;
-import javafx.util.Pair;
 import model.database.Database;
 import model.database.Query;
 import model.tables.Table;
 import model.tables.printer.PrinterFields;
 import model.tables.printerProjectAssociation.PrinterProjectAssociation;
 import model.tables.project.ProjectFields;
+import org.javatuples.Pair;
 import view.forms.PrinterProjectFormView;
 
 import java.util.Arrays;

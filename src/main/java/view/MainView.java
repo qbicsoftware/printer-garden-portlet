@@ -17,7 +17,7 @@ public class MainView {
         this.ui = ui;
 
         //Place buttons in the middle
-        this.rootFrame.setSizeFull();
+        //this.rootFrame.setSizeFull();
         HorizontalLayout layout = new HorizontalLayout();
         layout.addComponent(this.selection);
         layout.setComponentAlignment(selection, Alignment.MIDDLE_CENTER);

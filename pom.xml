@@ -28,9 +28,14 @@
 			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
 		<repository>
-			<id>nexusRelease</id>
+			<id>nexus-snap</id>
+			<name>qbic snapshots</name>
+			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-snapshots</url>
+		</repository>
+		<repository>
+			<id>nexus-release</id>
 			<name>qbic release</name>
-			<url>https://peltzer.com.de/nexus/content/repositories/releases</url>
+			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
 		</repository>
 	</repositories>
 
@@ -57,17 +62,20 @@
 
 
 	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<url>https://peltzer.com.de/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
 		<repository>
-			<uniqueVersion>false</uniqueVersion>
+			<uniqueVersion>true</uniqueVersion>
 			<id>nexus-release</id>
-			<name>Nexus Releases</name>
-			<url>https://peltzer.com.de/nexus/content/repositories/releases/</url>
+			<name>QBiC Releases</name>
+			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
 		</repository>
+		<snapshotRepository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>nexus-snap</id>
+			<name>QBiC Snapshots</name>
+			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
+
 
 	<dependencies>
 
@@ -156,6 +164,13 @@
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 			<version>2.0.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.javatuples/javatuples -->
+		<dependency>
+			<groupId>org.javatuples</groupId>
+			<artifactId>javatuples</artifactId>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 
