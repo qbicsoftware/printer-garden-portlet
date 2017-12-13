@@ -5,7 +5,6 @@ import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Notification;
-import life.qbic.MyPortletUI;
 import model.database.Database;
 import model.database.Query;
 import model.tables.Table;
@@ -13,8 +12,6 @@ import model.tables.printer.Printer;
 import utils.URLValidator;
 import view.forms.PrinterFormView;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,12 +23,11 @@ class PrinterPresenter {
     private final PrinterFormView form;
     private final Database database;
     private final Grid grid;
-    private final MyPortletUI ui;
-    PrinterPresenter(PrinterFormView form, Database database, Grid grid, MyPortletUI ui) {
+
+    PrinterPresenter(PrinterFormView form, Database database, Grid grid) {
         this.form = form;
         this.database = database;
         this.grid = grid;
-        this.ui = ui;
 
         setUpListener();
     }
@@ -67,8 +63,9 @@ class PrinterPresenter {
         List<String> entries;
         List<String> values;
 
-        //Database wants unique tuples of(name,location)
+        //Database wants unique tupels of(name,location)
         if(isNameAndLocationUnique(entry.getName(), entry.getLocation())) {
+            //also the url/ipadress should have the correct format
             if(URLValidator.validate(entry.getUrl())) {
                 if (entry.getUserGroup().isEmpty()) {
                     entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only");

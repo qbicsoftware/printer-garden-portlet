@@ -28,7 +28,6 @@ public class Database {
 
         //this.driverName = driverName;
         this.connectionURI = connectionURI;
-        System.out.println(connectionURI);
         this.user = user;
         this.password = password;
     }

@@ -36,6 +36,7 @@ public class MainPresenter {
         this.view = view;
 
         model.config.ConfigurationManager c = ConfigurationManagerFactory.getInstance();
+        //some issue with added whitespaces, trim those
         this.database = new Database(c.getMysqlUser().trim(), c.getMysqlPass(), "",
                 "jdbc:mariadb://" + c.getMysqlHost().trim()+ ":" + c.getMysqlPort().trim() + "/" + c.getMysqlDB().trim());
         this.ui = ui;
@@ -76,7 +77,7 @@ public class MainPresenter {
                     database.getPool()));
             PrinterFormView form =new PrinterFormView(this.ui, allExisIds);
             Grid grid = makeGridEditable(getPrinterGrid());
-            PrinterPresenter presenter = new PrinterPresenter(form, database, grid, ui);
+            PrinterPresenter presenter = new PrinterPresenter(form, database, grid);
             this.view.addGrid(grid, form);
         }catch(SQLException e){
             log.error("Could not connect to SQL model.database. Reason: " + e.getMessage());
