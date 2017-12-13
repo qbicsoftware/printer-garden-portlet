@@ -72,7 +72,7 @@ public class MainPresenter {
                     database.getPool()));
             PrinterFormView form =new PrinterFormView(this.ui, allExisIds);
             Grid grid = makeGridEditable(getPrinterGrid());
-            PrinterPresenter presenter = new PrinterPresenter(form, database, grid);
+            PrinterPresenter presenter = new PrinterPresenter(form, database, grid, ui);
             this.view.addGrid(grid, form);
         }catch(SQLException e){
             log.error("Could not connect to SQL model.database. Reason: " + e.getMessage());
@@ -173,7 +173,6 @@ public class MainPresenter {
         grid.isEditorActive();
         grid.setContainerDataSource(table);
         grid.setSizeFull();
-
         return grid;
     }
 

@@ -1,12 +1,24 @@
 package presenter;
 
+import com.vaadin.data.Property;
+import com.vaadin.data.util.sqlcontainer.SQLContainer;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Notification;
+import life.qbic.MyPortletUI;
 import model.database.Database;
+import model.database.Query;
 import model.tables.Table;
 import model.tables.printer.Printer;
+import utils.URLValidator;
 import view.forms.PrinterFormView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 class PrinterPresenter {
@@ -14,11 +26,12 @@ class PrinterPresenter {
     private final PrinterFormView form;
     private final Database database;
     private final Grid grid;
-
-    PrinterPresenter(PrinterFormView form, Database database, Grid grid) {
+    private final MyPortletUI ui;
+    PrinterPresenter(PrinterFormView form, Database database, Grid grid, MyPortletUI ui) {
         this.form = form;
         this.database = database;
         this.grid = grid;
+        this.ui = ui;
 
         setUpListener();
     }
@@ -31,8 +44,9 @@ class PrinterPresenter {
     private void saveButtonListener() {
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (isInvalidForm()) {
-                //TODO show alert
-                System.out.println("Please enter information !");
+                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
+                notification.setDelayMsec(30);
+                notification.show(Page.getCurrent());
             } else {
 
                 saveToPrinter(form.getFormEntries());
@@ -49,20 +63,62 @@ class PrinterPresenter {
                 || this.form.getUrl().isEmpty();
     }
 
-    private void saveToPrinter(Printer entry) {
+    private void saveToPrinter(Printer entry){
         List<String> entries;
         List<String> values;
-        if (entry.getUserGroup().isEmpty()) {
-            entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only");
-            values = Arrays.asList("'" + entry.getName() + "'", "'" + entry.getLocation() + "'", "'" + entry.getUrl() + "'", "'" + entry.getStatus().toString() + "'",
-                    "'" + entry.getType().toString() + "'", "'" + entry.getIsAdmin() + "'");
-        } else {
-            entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only", "user_group");
-            values = Arrays.asList("'" + entry.getName() + "'", "'" + entry.getLocation() + "'", "'" + entry.getUrl() + "'", "'" + entry.getStatus().toString() + "'",
-                    "'" + entry.getType().toString() + "'", "'" + entry.getIsAdmin() + "'", "'" + entry.getUserGroup() + "'");
+
+        //Database wants unique tuples of(name,location)
+        if(isNameAndLocationUnique(entry.getName(), entry.getLocation())) {
+            if(URLValidator.validate(entry.getUrl())) {
+                if (entry.getUserGroup().isEmpty()) {
+                    entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only");
+                    values = Arrays.asList("'" + entry.getName() + "'", "'" + entry.getLocation() + "'", "'" + entry.getUrl() + "'", "'" + entry.getStatus().toString() + "'",
+                            "'" + entry.getType().toString() + "'", "'" + entry.getIsAdmin() + "'");
+                } else {
+                    entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only", "user_group");
+                    values = Arrays.asList("'" + entry.getName() + "'", "'" + entry.getLocation() + "'", "'" + entry.getUrl() + "'", "'" + entry.getStatus().toString() + "'",
+                            "'" + entry.getType().toString() + "'", "'" + entry.getIsAdmin() + "'", "'" + entry.getUserGroup() + "'");
+                }
+
+                database.save(Table.labelprinter.toString(), entries, values, false);
+            }else{
+                Notification notification = new Notification("Please enter a correctly formatted URL!", Notification.Type.HUMANIZED_MESSAGE);
+                notification.setDelayMsec(30);
+                notification.show(Page.getCurrent());
+            }
+        }else{
+            Notification notification = new Notification("(Name, Location) is already assigned. Please use a unique tuple!", Notification.Type.HUMANIZED_MESSAGE);
+            notification.setDelayMsec(30);
+            notification.show(Page.getCurrent());
+
+
         }
-        database.save(Table.labelprinter.toString(), entries, values, false);
     }
+
+    private Boolean isNameAndLocationUnique(String name, String location) {
+        try {
+            SQLContainer currentPrinterNameLocations = database.loadTableFromQuery(
+                    Query.selectFrom(Arrays.asList("name", "location"), Collections.singletonList(Table.labelprinter.toString())) + ";");
+
+            Collection<?> currentNameIDs = currentPrinterNameLocations.getItemIds();
+            for (Object itemID : currentNameIDs) {
+                Property nameProp = currentPrinterNameLocations.getContainerProperty(itemID, "name");
+                Property locProp = currentPrinterNameLocations.getContainerProperty(itemID, "location");
+                String currName = nameProp.getValue().toString();
+                String currLoc = locProp.getValue().toString();
+
+                if(name.equals(currName) && location.equals(currLoc)){
+                    //If tuple already exists return false
+                    return false;
+                }
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+
+        }
+        return true;
+    }
+
 
     private void reload() {
         grid.clearSortOrder();
