@@ -6,6 +6,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;
+import model.config.ConfigurationManagerFactory;
 import presenter.MainPresenter;
 import view.MainView;
 
@@ -21,5 +22,6 @@ public class MyPortletUI extends UI {
 
         MainView mainView = new MainView(this);
         MainPresenter mainPresenter = new MainPresenter(mainView, this);
+
     }
 }

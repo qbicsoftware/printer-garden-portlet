@@ -17,17 +17,20 @@ import java.util.List;
 public class Database {
 
     private final String driverName = "com.mysql.jdbc.Driver";
-    private final String connectionURI = "jdbc:mysql://portal-testing.am10.uni-tuebingen.de:3306/qbic_usermanagement_db";
-
+    private final String connectionURI;
     private JDBCConnectionPool pool;
     private final String user;
     private final String password;
 
     private static final Log log = LogFactoryUtil.getLog(Database.class.getName());
 
-    public Database() {
-        user = "mariadbuser";
-        password = "dZAmDa9-Ysq_Zv1AGygQ";
+    public Database(String user, String password, String driverName, String connectionURI) {
+
+        //this.driverName = driverName;
+        this.connectionURI = connectionURI;
+        System.out.println(connectionURI);
+        this.user = user;
+        this.password = password;
     }
 
     public void connectToDatabase() throws IllegalArgumentException, SQLException {

@@ -7,6 +7,7 @@ import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.ui.Grid;
 import life.qbic.MyPortletUI;
+import model.config.ConfigurationManagerFactory;
 import model.database.Database;
 import model.database.Query;
 import model.tables.Table;
@@ -33,7 +34,10 @@ public class MainPresenter {
 
     public MainPresenter(MainView view, MyPortletUI ui){
         this.view = view;
-        this.database = new Database();
+
+        model.config.ConfigurationManager c = ConfigurationManagerFactory.getInstance();
+        this.database = new Database(c.getMysqlUser().trim(), c.getMysqlPass(), "",
+                "jdbc:mariadb://" + c.getMysqlHost().trim()+ ":" + c.getMysqlPort().trim() + "/" + c.getMysqlDB().trim());
         this.ui = ui;
 
         connectToDatabase();
