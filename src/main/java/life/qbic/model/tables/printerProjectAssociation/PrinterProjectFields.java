@@ -1,6 +1,6 @@
-package model.tables.printerProjectAssociation;
+package life.qbic.model.tables.printerProjectAssociation;
 
-import model.tables.Table;
+import life.qbic.model.tables.Table;
 
 public enum PrinterProjectFields {
     ID(Table.printer_project_association + ".id"),

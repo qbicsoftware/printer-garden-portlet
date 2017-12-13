@@ -1,4 +1,4 @@
-package model.tables.printerProjectAssociation;
+package life.qbic.model.tables.printerProjectAssociation;
 
 public enum PrinterProjectStatus {
     ACTIVE("ACTIVE"),

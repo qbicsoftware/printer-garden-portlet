@@ -1,4 +1,4 @@
-package model.tables;
+package life.qbic.model.tables;
 
 public enum Table {
     printer_project_association("printer_project_association"),

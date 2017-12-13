@@ -1,4 +1,4 @@
-package utils;
+package life.qbic.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,11 +1,11 @@
-package view.forms;
+package life.qbic.view.forms;
 
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.ui.*;
 import life.qbic.MyPortletUI;
-import model.tables.printerProjectAssociation.PrinterProjectAssociation;
-import model.tables.printerProjectAssociation.PrinterProjectStatus;
+import life.qbic.model.tables.printerProjectAssociation.PrinterProjectAssociation;
+import life.qbic.model.tables.printerProjectAssociation.PrinterProjectStatus;
 
 
 import java.sql.SQLException;

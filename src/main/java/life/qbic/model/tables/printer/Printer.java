@@ -1,5 +1,4 @@
-package model.tables.printer;
-
+package life.qbic.model.tables.printer;
 
 import java.io.Serializable;
 

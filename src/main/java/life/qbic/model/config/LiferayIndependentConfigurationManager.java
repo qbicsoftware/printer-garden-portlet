@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package model.config;
+package life.qbic.model.config;
 
 import java.io.File;
 import java.io.FileReader;
@@ -132,7 +132,7 @@ public enum LiferayIndependentConfigurationManager implements ConfigurationManag
         Properties portletConfig = new Properties();
         try {
             List<String> configs =
-                    new ArrayList<String>(Arrays.asList("/Users/qbic/Documents/QBiC/printer_garden/printer-garden/example.properties.txt"));
+                    new ArrayList<String>(Arrays.asList("/etc/qbic-ext.properties"));
             for (String s : configs) {
                 File f = new File(s);
                 if (f.exists())

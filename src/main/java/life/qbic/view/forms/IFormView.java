@@ -1,4 +1,4 @@
-package view.forms;
+package life.qbic.view.forms;
 
 interface IFormView <T> {
 

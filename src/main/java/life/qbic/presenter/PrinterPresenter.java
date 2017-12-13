@@ -1,16 +1,16 @@
-package presenter;
+package life.qbic.presenter;
 
 import com.vaadin.data.Property;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Notification;
-import model.database.Database;
-import model.database.Query;
-import model.tables.Table;
-import model.tables.printer.Printer;
-import utils.URLValidator;
-import view.forms.PrinterFormView;
+import life.qbic.model.database.Database;
+import life.qbic.model.database.Query;
+import life.qbic.model.tables.Table;
+import life.qbic.model.tables.printer.Printer;
+import life.qbic.utils.URLValidator;
+import life.qbic.view.forms.PrinterFormView;
 
 import java.sql.SQLException;
 import java.util.Arrays;

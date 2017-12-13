@@ -1,4 +1,4 @@
-package model.tables.printer;
+package life.qbic.model.tables.printer;
 
 public enum PrinterType {
     LABELPRINTER("LABEL PRINTER"),

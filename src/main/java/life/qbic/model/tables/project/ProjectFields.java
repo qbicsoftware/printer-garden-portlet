@@ -1,6 +1,6 @@
-package model.tables.project;
+package life.qbic.model.tables.project;
 
-import model.tables.Table;
+import life.qbic.model.tables.Table;
 
 public enum ProjectFields {
     ID(Table.projects.toString() + ".id"),

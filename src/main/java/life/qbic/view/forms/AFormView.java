@@ -1,4 +1,4 @@
-package view.forms;
+package life.qbic.view.forms;
 
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.ui.Button;

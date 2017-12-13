@@ -1,6 +1,6 @@
-package model.tables.printer;
+package life.qbic.model.tables.printer;
 
-import model.tables.Table;
+import life.qbic.model.tables.Table;
 
 public enum PrinterFields {
     ID(Table.labelprinter.toString() + ".id"),

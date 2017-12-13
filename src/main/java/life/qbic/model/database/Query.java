@@ -1,5 +1,4 @@
-package model.database;
-
+package life.qbic.model.database;
 
 import java.util.List;
 import java.util.stream.Collectors;

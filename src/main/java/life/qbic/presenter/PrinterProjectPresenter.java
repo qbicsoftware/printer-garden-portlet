@@ -1,14 +1,14 @@
-package presenter;
+package life.qbic.presenter;
 
 import com.vaadin.ui.Grid;
-import model.database.Database;
-import model.database.Query;
-import model.tables.Table;
-import model.tables.printer.PrinterFields;
-import model.tables.printerProjectAssociation.PrinterProjectAssociation;
-import model.tables.project.ProjectFields;
+import life.qbic.model.database.Database;
+import life.qbic.model.database.Query;
+import life.qbic.model.tables.Table;
+import life.qbic.model.tables.printer.PrinterFields;
+import life.qbic.model.tables.printerProjectAssociation.PrinterProjectAssociation;
+import life.qbic.model.tables.project.ProjectFields;
 import org.javatuples.Pair;
-import view.forms.PrinterProjectFormView;
+import life.qbic.view.forms.PrinterProjectFormView;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package presenter;
+package life.qbic.presenter;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -7,16 +7,16 @@ import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.ui.Grid;
 import life.qbic.MyPortletUI;
-import model.config.ConfigurationManagerFactory;
-import model.database.Database;
-import model.database.Query;
-import model.tables.Table;
-import model.tables.printer.PrinterFields;
-import model.tables.printerProjectAssociation.PrinterProjectFields;
-import model.tables.project.ProjectFields;
-import view.MainView;
-import view.forms.PrinterFormView;
-import view.forms.PrinterProjectFormView;
+import life.qbic.model.config.ConfigurationManagerFactory;
+import life.qbic.model.database.Database;
+import life.qbic.model.database.Query;
+import life.qbic.model.tables.Table;
+import life.qbic.model.tables.printer.PrinterFields;
+import life.qbic.model.tables.printerProjectAssociation.PrinterProjectFields;
+import life.qbic.model.tables.project.ProjectFields;
+import life.qbic.view.MainView;
+import life.qbic.view.forms.PrinterFormView;
+import life.qbic.view.forms.PrinterProjectFormView;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -35,7 +35,7 @@ public class MainPresenter {
     public MainPresenter(MainView view, MyPortletUI ui){
         this.view = view;
 
-        model.config.ConfigurationManager c = ConfigurationManagerFactory.getInstance();
+        life.qbic.model.config.ConfigurationManager c = ConfigurationManagerFactory.getInstance();
         //some issue with added whitespaces, trim those
         this.database = new Database(c.getMysqlUser().trim(), c.getMysqlPass(), "",
                 "jdbc:mariadb://" + c.getMysqlHost().trim()+ ":" + c.getMysqlPort().trim() + "/" + c.getMysqlDB().trim());

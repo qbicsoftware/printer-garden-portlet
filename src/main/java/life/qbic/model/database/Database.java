@@ -1,4 +1,4 @@
-package model.database;
+package life.qbic.model.database;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

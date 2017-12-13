@@ -2,7 +2,7 @@ package life.qbic.view;
 
 import com.vaadin.ui.*;
 import life.qbic.MyPortletUI;
-import view.forms.AFormView;
+import life.qbic.view.forms.AFormView;
 
 public class MainView {
 
