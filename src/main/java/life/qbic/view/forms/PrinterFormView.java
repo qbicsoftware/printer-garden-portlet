@@ -20,6 +20,10 @@ public class PrinterFormView extends AFormView implements IFormView {
     private final ComboBox type = new ComboBox("Type");
     private final CheckBox adminOnly = new CheckBox("Admin only");
 
+    private final HorizontalLayout options = new HorizontalLayout();
+    private final VerticalLayout saveForm = new VerticalLayout();
+    private final VerticalLayout deleteForm = new VerticalLayout();
+
 
     public PrinterFormView(MyPortletUI myUI, SQLContainer exisIDs) throws SQLException{
         super(myUI, exisIDs);
@@ -29,9 +33,14 @@ public class PrinterFormView extends AFormView implements IFormView {
 
     @Override
     public void addComponentsToView() {
-        setSizeUndefined();
-        addComponents(name, location, url, status, type, adminOnly, userGroup,
-                getSaveButton(), getRowID(), getDeleteButton());
+        saveForm.addComponents(name, location, url, status, type, adminOnly, userGroup,
+                getSaveButton());
+        saveForm.setSpacing(true);
+        deleteForm.addComponents(getRowID(), getDeleteButton());
+        deleteForm.setSpacing(true);
+        options.addComponents(saveForm, deleteForm);
+        options.setSpacing(true);
+        addComponent(options);
     }
 
     @Override

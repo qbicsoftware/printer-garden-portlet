@@ -25,7 +25,6 @@ public class Database {
     private static final Log log = LogFactoryUtil.getLog(Database.class.getName());
 
     public Database(String user, String password, String driverName, String connectionURI) {
-
         //this.driverName = driverName;
         this.connectionURI = connectionURI;
         this.user = user;

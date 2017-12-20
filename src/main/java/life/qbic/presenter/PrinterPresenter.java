@@ -44,7 +44,6 @@ class PrinterPresenter {
                 notification.setDelayMsec(30);
                 notification.show(Page.getCurrent());
             } else {
-
                 saveToPrinter(form.getFormEntries());
                 reload();
                 this.form.emptyForm();
@@ -79,16 +78,12 @@ class PrinterPresenter {
 
                 database.save(Table.labelprinter.toString(), entries, values, false);
             }else{
-                Notification notification = new Notification("Please enter a correctly formatted URL!", Notification.Type.HUMANIZED_MESSAGE);
-                notification.setDelayMsec(30);
+                Notification notification = new Notification("Please enter a correctly formatted URL!", Notification.Type.ERROR_MESSAGE);
                 notification.show(Page.getCurrent());
             }
         }else{
-            Notification notification = new Notification("(Name, Location) is already assigned. Please use a unique tuple!", Notification.Type.HUMANIZED_MESSAGE);
-            notification.setDelayMsec(30);
+            Notification notification = new Notification("(Name, Location) is already assigned. Please use a unique tuple!", Notification.Type.ERROR_MESSAGE);
             notification.show(Page.getCurrent());
-
-
         }
     }
 
@@ -129,7 +124,9 @@ class PrinterPresenter {
 
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
-            System.out.println("Please enter information");
+            Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
+            notification.setDelayMsec(30);
+            notification.show(Page.getCurrent());
         } else {
             database.delete(Table.labelprinter.toString(), this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2]);

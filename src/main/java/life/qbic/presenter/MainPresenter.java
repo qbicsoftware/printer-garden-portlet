@@ -37,7 +37,7 @@ public class MainPresenter {
 
         life.qbic.model.config.ConfigurationManager c = ConfigurationManagerFactory.getInstance();
         //some issue with added whitespaces, trim those
-        this.database = new Database(c.getMysqlUser().trim(), c.getMysqlPass(), "",
+        this.database = new Database(c.getMysqlUser().trim(), c.getMysqlPass().trim(), "",
                 "jdbc:mariadb://" + c.getMysqlHost().trim()+ ":" + c.getMysqlPort().trim() + "/" + c.getMysqlDB().trim());
         this.ui = ui;
 

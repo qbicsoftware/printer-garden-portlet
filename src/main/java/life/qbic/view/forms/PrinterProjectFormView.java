@@ -20,6 +20,10 @@ public class PrinterProjectFormView extends AFormView implements IFormView {
     private final SQLContainer allExisPrinterLocationNames;
     private final SQLContainer allExisProjectNames;
 
+    private final HorizontalLayout options = new HorizontalLayout();
+    private final VerticalLayout saveForm = new VerticalLayout();
+    private final VerticalLayout deleteForm = new VerticalLayout();
+
     public PrinterProjectFormView(MyPortletUI myUI, SQLContainer exisIds, SQLContainer allExisPrinterNames,
                                   SQLContainer allExisProjectNames) throws SQLException{
         super(myUI, exisIds);
@@ -32,8 +36,13 @@ public class PrinterProjectFormView extends AFormView implements IFormView {
 
     @Override
     public void addComponentsToView() {
-        setSizeUndefined();
-        addComponents(printerNameLocation, projectName, status, getSaveButton(), getRowID(), getDeleteButton());
+        saveForm.addComponents(printerNameLocation, projectName, status, getSaveButton());
+        saveForm.setSpacing(true);
+        deleteForm.addComponents(getRowID(), getDeleteButton());
+        deleteForm.setSpacing(true);
+        options.addComponents(saveForm, deleteForm);
+        options.setSpacing(true);
+        addComponent(options);
     }
 
     @Override

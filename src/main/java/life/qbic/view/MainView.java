@@ -10,13 +10,12 @@ public class MainView {
     private final VerticalLayout rootFrame;
     private final MyPortletUI ui;
     public MainView(MyPortletUI ui){
-        this.selection = new OptionGroup("Select: ");
+        this.selection = new OptionGroup("Change selection: ");
         this.selection.addItems("Printer", "Printer Project Association");
         this.rootFrame = new VerticalLayout();
         this.ui = ui;
 
         //Place buttons in the middle
-        //this.rootFrame.setSizeFull();
         HorizontalLayout layout = new HorizontalLayout();
         layout.addComponent(this.selection);
         layout.setComponentAlignment(selection, Alignment.MIDDLE_CENTER);

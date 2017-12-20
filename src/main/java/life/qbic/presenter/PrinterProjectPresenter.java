@@ -1,6 +1,8 @@
 package life.qbic.presenter;
 
+import com.vaadin.server.Page;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Notification;
 import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
 import life.qbic.model.tables.Table;
@@ -36,8 +38,9 @@ class PrinterProjectPresenter {
     private void saveButtonListener(){
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (this.form.getPrinterNameLocation() == null || this.form.getProjectName().isEmpty()) {
-                //TODO show alert
-                System.out.println("Please enter information !");
+                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
+                notification.setDelayMsec(30);
+                notification.show(Page.getCurrent());
             }else{
                 saveToPrinterProject(form.getFormEntries());
                 reload();
@@ -77,7 +80,9 @@ class PrinterProjectPresenter {
 
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
-            System.out.println("Please enter information");
+            Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
+            notification.setDelayMsec(30);
+            notification.show(Page.getCurrent());
         } else {
             database.delete(Table.printer_project_association.toString(), this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2]);
