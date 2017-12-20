@@ -117,9 +117,7 @@ class PrinterPresenter {
     }
 
     private void deleteButtonListener() {
-        this.form.getDeleteButton().addClickListener(clickEvent -> {
-            deleteEntry();
-        });
+        this.form.getDeleteButton().addClickListener(clickEvent -> deleteEntry());
     }
 
     private void deleteEntry() {

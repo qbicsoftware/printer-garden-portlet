@@ -6,9 +6,9 @@ import java.io.Serializable;
 public class PrinterProjectAssociation implements Serializable, Cloneable {
 
 
-    private String printerName = "";
-    private String printerLocation = "";
-    private String projectName = "";
+    private final String printerName;
+    private final String printerLocation;
+    private final String projectName;
     private final PrinterProjectStatus status;
 
     public PrinterProjectAssociation(String printerName, String printerLocation, String projectName, PrinterProjectStatus status) {

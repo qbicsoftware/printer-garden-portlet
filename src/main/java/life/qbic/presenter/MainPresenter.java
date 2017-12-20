@@ -27,7 +27,6 @@ public class MainPresenter {
 
     private final MainView view;
     private final Database database;
-    private final MyPortletUI ui;
 
     private static final Log log = LogFactoryUtil.getLog(MainPresenter.class.getName());
 
@@ -39,7 +38,6 @@ public class MainPresenter {
         //some issue with added whitespaces, trim those
         this.database = new Database(c.getMysqlUser().trim(), c.getMysqlPass().trim(), "",
                 "jdbc:mariadb://" + c.getMysqlHost().trim()+ ":" + c.getMysqlPort().trim() + "/" + c.getMysqlDB().trim());
-        this.ui = ui;
 
         connectToDatabase();
         setUpListeners();
@@ -75,7 +73,7 @@ public class MainPresenter {
                     Query.selectFrom(Collections.singletonList(PrinterFields.ID.toString()),
                             Collections.singletonList(Table.labelprinter.toString()))+";",
                     database.getPool()));
-            PrinterFormView form =new PrinterFormView(this.ui, allExisIds);
+            PrinterFormView form =new PrinterFormView(allExisIds);
             Grid grid = makeGridEditable(getPrinterGrid());
             PrinterPresenter presenter = new PrinterPresenter(form, database, grid);
             this.view.addGrid(grid, form);
@@ -89,10 +87,10 @@ public class MainPresenter {
         //Collect edits in printer grid
         grid.getEditorFieldGroup().addCommitHandler(new FieldGroup.CommitHandler() {
             @Override
-            public void preCommit(FieldGroup.CommitEvent commitEvent) throws FieldGroup.CommitException {
+            public void preCommit(FieldGroup.CommitEvent commitEvent) {
             }
             @Override
-            public void postCommit(FieldGroup.CommitEvent commitEvent) throws FieldGroup.CommitException {
+            public void postCommit(FieldGroup.CommitEvent commitEvent) {
                 reload(grid);
             }
         });
@@ -113,7 +111,7 @@ public class MainPresenter {
                     Query.selectFrom(Arrays.asList(PrinterFields.NAME.toString(), PrinterFields.LOCATION.toString()),
                             Collections.singletonList(Table.labelprinter.toString()))+";"
                     , database.getPool()));
-            PrinterProjectFormView form = new PrinterProjectFormView(this.ui,allExisIds, allExisPrinterNames, allExisProjectNames);
+            PrinterProjectFormView form = new PrinterProjectFormView(allExisIds, allExisPrinterNames, allExisProjectNames);
             Grid grid = getPrinterProjectGrid();
             PrinterProjectPresenter presenter = new PrinterProjectPresenter(form, database, grid);
             this.view.addGrid(grid, form);

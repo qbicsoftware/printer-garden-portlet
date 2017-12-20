@@ -13,14 +13,12 @@ import java.sql.SQLException;
 
 public class AFormView extends FormLayout{
 
-    protected final MyPortletUI ui;
     private final Button saveButton = new Button("Save");
     private final Button deleteButton = new Button("Delete");
     private final ComboBox rowID = new ComboBox("ID");
 
-    AFormView(MyPortletUI ui, SQLContainer ids) throws SQLException{
+    AFormView(SQLContainer ids) {
         super();
-        this.ui = ui;
 
         saveButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
         saveButton.setClickShortcut(KeyboardEvent.KeyCode.ENTER);

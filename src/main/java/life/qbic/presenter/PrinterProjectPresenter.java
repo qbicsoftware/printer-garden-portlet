@@ -21,6 +21,7 @@ class PrinterProjectPresenter {
     private final PrinterProjectFormView form;
     private final Database database;
     private final Grid grid;
+    
     PrinterProjectPresenter(PrinterProjectFormView form, Database database, Grid grid){
         this.form = form;
         this.database = database;

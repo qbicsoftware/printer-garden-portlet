@@ -5,11 +5,11 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Printer implements Serializable, Cloneable {
 
-    private String name = "";
+    private final String name;
 
-    private String location = "";
+    private final String location;
 
-    private String url = "";
+    private final String url;
 
     private final PrinterStatus status;
 
@@ -17,7 +17,7 @@ public class Printer implements Serializable, Cloneable {
 
     private String isAdmin = "";
 
-    private String userGroup = "";
+    private final String userGroup;
 
     public Printer (String name, String location, String url, PrinterStatus status, PrinterType type, Boolean isAdmin, String userGroup){
         this.name = name;

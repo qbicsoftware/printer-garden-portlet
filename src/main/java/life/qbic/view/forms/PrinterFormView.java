@@ -25,8 +25,8 @@ public class PrinterFormView extends AFormView implements IFormView {
     private final VerticalLayout deleteForm = new VerticalLayout();
 
 
-    public PrinterFormView(MyPortletUI myUI, SQLContainer exisIDs) throws SQLException{
-        super(myUI, exisIDs);
+    public PrinterFormView(SQLContainer exisIDs) {
+        super(exisIDs);
         specifyComponents();
         addComponentsToView();
     }

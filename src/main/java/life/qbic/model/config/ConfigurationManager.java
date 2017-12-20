@@ -28,44 +28,44 @@ import java.util.List;
  */
 public interface ConfigurationManager {
 
-    public String getVocabularyMSLabeling();
+    String getVocabularyMSLabeling();
 
-    public String getConfigurationFileName();
+    String getConfigurationFileName();
 
-    public String getDataSourceUser();
+    String getDataSourceUser();
 
-    public String getDataSourcePassword();
+    String getDataSourcePassword();
 
-    public String getDataSourceUrl();
+    String getDataSourceUrl();
 
-    public String getBarcodeScriptsFolder();
+    String getBarcodeScriptsFolder();
 
-    public String getTmpFolder();
+    String getTmpFolder();
 
-    public String getBarcodePathVariable();
+    String getBarcodePathVariable();
 
-    public String getAttachmentURI();
+    String getAttachmentURI();
 
-    public String getAttachmentUser();
+    String getAttachmentUser();
 
-    public String getAttachmenPassword();
+    String getAttachmenPassword();
 
-    public String getAttachmentMaxSize();
+    String getAttachmentMaxSize();
 
-    public String getMysqlHost();
+    String getMysqlHost();
 
-    public String getMysqlPort();
+    String getMysqlPort();
 
-    public String getMysqlDB();
+    String getMysqlDB();
 
-    public String getMysqlUser();
+    String getMysqlUser();
 
-    public String getMysqlPass();
+    String getMysqlPass();
 
-    public String getLdapHost();
-    public String getLdapBase();
-    public String getLdapUser();
-    public String getLdapPass();
+    String getLdapHost();
+    String getLdapBase();
+    String getLdapUser();
+    String getLdapPass();
 
     List<String> getDBInputUserGrps();
 

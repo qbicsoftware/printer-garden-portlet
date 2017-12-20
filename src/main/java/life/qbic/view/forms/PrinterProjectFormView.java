@@ -24,9 +24,9 @@ public class PrinterProjectFormView extends AFormView implements IFormView {
     private final VerticalLayout saveForm = new VerticalLayout();
     private final VerticalLayout deleteForm = new VerticalLayout();
 
-    public PrinterProjectFormView(MyPortletUI myUI, SQLContainer exisIds, SQLContainer allExisPrinterNames,
-                                  SQLContainer allExisProjectNames) throws SQLException{
-        super(myUI, exisIds);
+    public PrinterProjectFormView(SQLContainer exisIds, SQLContainer allExisPrinterNames,
+                                  SQLContainer allExisProjectNames) {
+        super(exisIds);
         this.allExisPrinterLocationNames = allExisPrinterNames;
         this.allExisProjectNames = allExisProjectNames;
 
