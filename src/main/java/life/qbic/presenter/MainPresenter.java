@@ -143,10 +143,8 @@ public class MainPresenter {
     private Grid getPrinterProjectGrid(){
         Grid printerProjectAssociationGrid = new Grid();
         List<String> printerProjectFields = Arrays.asList(PrinterProjectFields.ID.toString(),
-                PrinterProjectFields.PRINTER_ID.toString(),
                 PrinterFields.NAME.toString(),
                 PrinterFields.LOCATION.toString(),
-                PrinterProjectFields.PROJECT_ID.toString(),
                 ProjectFields.OPENBISID.toString(),
                 PrinterProjectFields.STATUS.toString());
 

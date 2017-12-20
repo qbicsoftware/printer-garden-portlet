@@ -47,11 +47,9 @@ public class PrinterProjectFormView extends AFormView implements IFormView {
 
     @Override
     public void specifyComponents() {
-
             setExistingPrinterNameLocationCombinations();
             setExistingOpenBisProjectNames();
             setStatus();
-
     }
 
     /**
