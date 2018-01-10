@@ -8,6 +8,7 @@ import com.vaadin.data.util.sqlcontainer.connection.SimpleJDBCConnectionPool;
 import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.data.util.sqlcontainer.query.TableQuery;
 import life.qbic.model.main.MyPortletUI;
+import life.qbic.utils.MyNotification;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -90,6 +91,7 @@ public class Database {
             conn.commit();
             log.info(MyPortletUI.toolname + ": " + "Query was executed successfully.");
         } catch (SQLException e) {
+            MyNotification.notification("Error", "Database access failed.", "error");
             log.error(MyPortletUI.toolname + ": " + "Changes could not be executed on database: Query:\n" + query);
         } finally {
             pool.releaseConnection(conn);

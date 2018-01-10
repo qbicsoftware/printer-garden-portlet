@@ -121,6 +121,7 @@ class PrinterPresenter {
             }
             log.info(MyPortletUI.toolname + ": " +"Tuple validation was successful.");
         }catch(SQLException e){
+            MyNotification.notification("Error", "Database access failed.", "error");
             log.error(MyPortletUI.toolname + ": " +"Tuple validation failed: " + e.getMessage());
         }
         return true;

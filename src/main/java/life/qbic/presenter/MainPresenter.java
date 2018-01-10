@@ -15,6 +15,7 @@ import life.qbic.model.tables.Table;
 import life.qbic.model.tables.printer.PrinterFields;
 import life.qbic.model.tables.printerProjectAssociation.PrinterProjectFields;
 import life.qbic.model.tables.project.ProjectFields;
+import life.qbic.utils.MyNotification;
 import life.qbic.view.MainView;
 import life.qbic.view.forms.PrinterFormView;
 import life.qbic.view.forms.PrinterProjectFormView;
@@ -59,6 +60,7 @@ public class MainPresenter {
             this.database.connectToDatabase();
             log.info(MyPortletUI.toolname + ": " +"Connection to database was successful.");
         } catch (SQLException exp) {
+            MyNotification.notification("Error", "Database connection failed.", "error");
             log.error(MyPortletUI.toolname + ": " + LiferayAndVaadinUtils.getUser().getScreenName() + " could not connect to database. Reason: " + exp.getMessage());
         }
     }
@@ -70,11 +72,11 @@ public class MainPresenter {
     private void addSelectionListener(){
         this.view.getSelection().addValueChangeListener(valueChangeEvent -> {
             if (this.view.getSelection().getValue().equals("Printer")) {
-                addPrinter();
                 log.info(MyPortletUI.toolname + ": " +"Printer table was selected");
+                addPrinter();
             }else if(this.view.getSelection().getValue().equals("Printer Project Association")){
-                addPrinterProject();
                 log.info(MyPortletUI.toolname + ": " +"Printer Project table was selected");
+                addPrinterProject();
             }
         });
     }
@@ -92,6 +94,7 @@ public class MainPresenter {
             this.view.addGrid(grid, form);
             log.info(MyPortletUI.toolname + ": " +"Printer table was retrieved and set up successfully.");
         }catch(SQLException e){
+            MyNotification.notification("Error", "Database access failed.", "error");
             log.error(MyPortletUI.toolname + ": " +"Access and retrieval of printer table failed: " + e.getMessage());
 
         }
@@ -132,6 +135,7 @@ public class MainPresenter {
             this.view.addGrid(grid, form);
             log.info(MyPortletUI.toolname + ": " +"Printer-project table was retrieved and set up successfully.");
         }catch(SQLException e){
+            MyNotification.notification("Error", "Database access failed.", "error");
             log.error(MyPortletUI.toolname + ": " +"Printer-project table could not be set up " + e.getMessage());
 
         }
@@ -151,6 +155,7 @@ public class MainPresenter {
             printerGrid.setEditorBuffered(true);
             log.info(MyPortletUI.toolname + ": " +"Successfully loaded printer table.");
         }catch(SQLException e){
+            MyNotification.notification("Error", "Database access failed.", "error");
             log.error(MyPortletUI.toolname + ": " +"Printer table could not be loaded: " + e.getMessage());
 
         }
@@ -180,6 +185,7 @@ public class MainPresenter {
             printerProjectAssociationGrid.setEditorBuffered(false);
             log.info(MyPortletUI.toolname + ": " +"Printer-project table was loaded successfully.");
         }catch(SQLException e){
+            MyNotification.notification("Error", "Database access failed.", "error");
             log.error(MyPortletUI.toolname + ": " +"Printer-project table could not be loaded: " + e.getMessage());
         }
         return printerProjectAssociationGrid;
