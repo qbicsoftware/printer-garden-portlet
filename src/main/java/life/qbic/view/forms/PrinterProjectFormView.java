@@ -3,12 +3,8 @@ package life.qbic.view.forms;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.ui.*;
-import life.qbic.MyPortletUI;
 import life.qbic.model.tables.printerProjectAssociation.PrinterProjectAssociation;
 import life.qbic.model.tables.printerProjectAssociation.PrinterProjectStatus;
-
-
-import java.sql.SQLException;
 
 
 public class PrinterProjectFormView extends AFormView implements IFormView {
@@ -90,7 +86,6 @@ public class PrinterProjectFormView extends AFormView implements IFormView {
     public PrinterProjectAssociation getFormEntries(){
 
         //More a hack than a solution, due to the parsing of the form entries
-        //TODO apparently this to string method is deprecated
         String addedPrinterName = this.printerNameLocation.getItem(this.printerNameLocation.getValue()).toString().split(":")[2].split("\\|")[0];
         String addedPrinterLocation = this.printerNameLocation.getItem(this.printerNameLocation.getValue()).toString().split(":")[3];
         String addedProjectName = projectName.getItem(projectName.getValue()).toString().split(":")[2];

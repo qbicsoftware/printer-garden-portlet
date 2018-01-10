@@ -1,5 +1,7 @@
 package life.qbic.presenter;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vaadin.ui.Grid;
 import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
@@ -20,7 +22,10 @@ class PrinterProjectPresenter {
     private final PrinterProjectFormView form;
     private final Database database;
     private final Grid grid;
-    
+
+    private static final Log log = LogFactoryUtil.getLog(PrinterProjectPresenter.class.getName());
+
+
     PrinterProjectPresenter(PrinterProjectFormView form, Database database, Grid grid){
         this.form = form;
         this.database = database;
@@ -39,11 +44,10 @@ class PrinterProjectPresenter {
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (this.form.getPrinterNameLocation() == null || this.form.getProjectName().isEmpty()) {
                 MyNotification.notification("Information", "Please enter information!", "" );
+                log.info("No information to safe was provided in the printer-project form.");
 
-//                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
-//                notification.setDelayMsec(30);
-//                notification.show(Page.getCurrent());
             }else{
+                log.info("New entry is saved to printer-project table.");
                 saveToPrinterProject(form.getFormEntries());
                 reload();
                 this.form.emptyForm();
@@ -52,6 +56,11 @@ class PrinterProjectPresenter {
     }
 
     private void saveToPrinterProject(PrinterProjectAssociation entry) {
+
+        log.info("Try to save new entry with: \n" +
+                "\tprinterName:\t" + entry.getPrinterName() + "\n" +
+                "\tprojectName:\t" + entry.getProjectName()  + "\n" +
+                "\tstatus:\t" + entry.getStatus());
 
         List<String> entries = Arrays.asList("printer_id", "project_id", "status");
 
@@ -82,12 +91,11 @@ class PrinterProjectPresenter {
 
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
+            log.info("No information to delete was provided in the printer-project form.");
             MyNotification.notification("Information", "Please enter information!", "" );
-
-//            Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
-//            notification.setDelayMsec(30);
-//            notification.show(Page.getCurrent());
         } else {
+            log.info("Entry with ID " + this.form.getRowID().getItem(
+                    this.form.getRowID().getValue()).toString().split(":")[2] +" is deleted");
             database.delete(Table.printer_project_association.toString(), this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2]);
             this.form.emptyForm();

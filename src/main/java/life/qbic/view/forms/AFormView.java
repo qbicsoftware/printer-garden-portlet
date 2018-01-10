@@ -6,9 +6,6 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import elemental.events.KeyboardEvent;
-import life.qbic.MyPortletUI;
-
-import java.sql.SQLException;
 
 
 public class AFormView extends FormLayout{

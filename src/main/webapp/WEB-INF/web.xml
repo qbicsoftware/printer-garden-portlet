@@ -10,7 +10,7 @@
 
 		<init-param>
 			<param-name>UI</param-name>
-			<param-value>life.qbic.MyPortletUI</param-value>
+			<param-value>life.qbic.model.main.MyPortletUI</param-value>
 		</init-param>s
 	</servlet>
 	<servlet-mapping>

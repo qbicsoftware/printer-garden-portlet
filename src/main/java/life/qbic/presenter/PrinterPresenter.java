@@ -1,11 +1,10 @@
 package life.qbic.presenter;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
-import com.vaadin.server.Page;
-import com.vaadin.shared.Position;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Notification;
 import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
 import life.qbic.model.tables.Table;
@@ -26,6 +25,9 @@ class PrinterPresenter {
     private final Database database;
     private final Grid grid;
 
+    private static final Log log = LogFactoryUtil.getLog(PrinterPresenter.class.getName());
+
+
     PrinterPresenter(PrinterFormView form, Database database, Grid grid) {
         this.form = form;
         this.database = database;
@@ -43,10 +45,9 @@ class PrinterPresenter {
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (isInvalidForm()) {
                 MyNotification.notification("Information", "Please enter information!", "" );
-//                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
-//                notification.setDelayMsec(30);
-//                notification.show(Page.getCurrent());
+                log.info("No information to safe was provided in the printer form.");
             } else {
+                log.info("New entry is saved to printer table.");
                 saveToPrinter(form.getFormEntries());
                 reload();
                 this.form.emptyForm();
@@ -69,6 +70,15 @@ class PrinterPresenter {
         if(isNameAndLocationUnique(entry.getName(), entry.getLocation())) {
             //also the url/ipadress should have the correct format
             if(URLValidator.validate(entry.getUrl())) {
+                log.info("Try to save new entry with \n" +
+                        "\tname:\t" + entry.getName() + "\n" +
+                        "\tlocation:\t" + entry.getLocation()  + "\n" +
+                        "\turl:\t" + entry.getUrl() + "\n" +
+                        "\tstatus:\t" + entry.getStatus() + "\n" +
+                        "\ttype:\t" + entry.getType()  + "\n" +
+                        "\tadmin_only:\t" + entry.getIsAdmin() + "\n" +
+                        "\tuser_group:\t" + entry.getUserGroup());
+
                 if (entry.getUserGroup().isEmpty()) {
                     entries = Arrays.asList("name", "location", "url", "status", "type", "admin_only");
                     values = Arrays.asList("'" + entry.getName() + "'", "'" + entry.getLocation() + "'", "'" + entry.getUrl() + "'", "'" + entry.getStatus().toString() + "'",
@@ -81,19 +91,18 @@ class PrinterPresenter {
 
                 database.save(Table.labelprinter.toString(), entries, values, false);
             }else{
+                log.error("Provided URL is has incorrect format.");
                 MyNotification.notification("Error", "Please enter a correctly formatted URL!", "error");
-//                Notification notification = new Notification("Please enter a correctly formatted URL!", Notification.Type.ERROR_MESSAGE);
-//                notification.show(Page.getCurrent());
             }
         }else{
+            log.error("(Name, Location) is already assigned. Tuple has to be unique.");
             MyNotification.notification("Error", "(Name, Location) is already assigned. Please use a unique tuple!", "error");
-//            Notification notification = new Notification("(Name, Location) is already assigned. Please use a unique tuple!", Notification.Type.ERROR_MESSAGE);
-//            notification.show(Page.getCurrent());
         }
     }
 
     private Boolean isNameAndLocationUnique(String name, String location) {
         try {
+            log.debug("Try to validate if (name, location) tuple is unique");
             SQLContainer currentPrinterNameLocations = database.loadTableFromQuery(
                     Query.selectFrom(Arrays.asList("name", "location"), Collections.singletonList(Table.labelprinter.toString())) + ";");
 
@@ -109,9 +118,9 @@ class PrinterPresenter {
                     return false;
                 }
             }
+            log.info("Tuple validation was successful.");
         }catch(SQLException e){
-            System.out.println(e.getMessage());
-
+            log.error("Tuple validation failed: " + e.getMessage());
         }
         return true;
     }
@@ -127,13 +136,11 @@ class PrinterPresenter {
 
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
+            log.info("No information to delete was provided in the printer form.");
             MyNotification.notification("Information", "Please enter information!", "" );
-//            Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
-//            notification.setDelayMsec(30);
-//            notification.setPosition(Position.MIDDLE_CENTER);
-//
-//            notification.show(Page.getCurrent());
         } else {
+            log.info("Entry with ID " + this.form.getRowID().getItem(
+                    this.form.getRowID().getValue()).toString().split(":")[2] +" is deleted");
             database.delete(Table.labelprinter.toString(), this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2]);
             this.form.emptyForm();

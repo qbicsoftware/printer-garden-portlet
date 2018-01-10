@@ -1,4 +1,4 @@
-package life.qbic;
+package life.qbic.model.main;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

@@ -54,7 +54,7 @@ public class Database {
     public void delete(String tableName, String rowId) {
 
         if (rowId == null || rowId.isEmpty()) {
-            log.info("ID is null.");
+            log.info("Provided ID from table " + tableName + " is null.");
             return;
         }
         String query = Query.deleteFromWhere(tableName, "id", rowId);
@@ -64,7 +64,7 @@ public class Database {
 
     public void save(String tableName, List<String> entry, List<String> values, boolean isStatement) {
         if (entry == null) {
-            log.info("Entry is null.");
+            log.info("Provided entry to safe is null.");
             return;
         }
         String query;
@@ -87,11 +87,12 @@ public class Database {
             statement.close();
             conn.setAutoCommit(true);
             conn.commit();
-
+            log.info("Query was executed successfully.");
         } catch (SQLException e) {
-            log.error("Changes could not be executed on database. Reason: " + e.getMessage());
+            log.error("Changes could not be executed on database: Query:\n" + query);
         } finally {
             pool.releaseConnection(conn);
+            log.info("Connection was released after free query execution.");
         }
     }
 

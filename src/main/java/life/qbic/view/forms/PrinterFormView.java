@@ -2,11 +2,9 @@ package life.qbic.view.forms;
 
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.ui.*;
-import life.qbic.MyPortletUI;
 import life.qbic.model.tables.printer.Printer;
 import life.qbic.model.tables.printer.PrinterStatus;
 import life.qbic.model.tables.printer.PrinterType;
-import java.sql.SQLException;
 
 
 public class PrinterFormView extends AFormView implements IFormView {
