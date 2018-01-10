@@ -7,6 +7,7 @@ import com.vaadin.data.util.sqlcontainer.connection.JDBCConnectionPool;
 import com.vaadin.data.util.sqlcontainer.connection.SimpleJDBCConnectionPool;
 import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.data.util.sqlcontainer.query.TableQuery;
+import life.qbic.model.main.MyPortletUI;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -54,7 +55,7 @@ public class Database {
     public void delete(String tableName, String rowId) {
 
         if (rowId == null || rowId.isEmpty()) {
-            log.info("Provided ID from table " + tableName + " is null.");
+            log.info(MyPortletUI.toolname + ": " + "Provided ID from table " + tableName + " is null.");
             return;
         }
         String query = Query.deleteFromWhere(tableName, "id", rowId);
@@ -64,7 +65,7 @@ public class Database {
 
     public void save(String tableName, List<String> entry, List<String> values, boolean isStatement) {
         if (entry == null) {
-            log.info("Provided entry to safe is null.");
+            log.info(MyPortletUI.toolname + ": " + "Provided entry to safe is null.");
             return;
         }
         String query;
@@ -87,12 +88,12 @@ public class Database {
             statement.close();
             conn.setAutoCommit(true);
             conn.commit();
-            log.info("Query was executed successfully.");
+            log.info(MyPortletUI.toolname + ": " + "Query was executed successfully.");
         } catch (SQLException e) {
-            log.error("Changes could not be executed on database: Query:\n" + query);
+            log.error(MyPortletUI.toolname + ": " + "Changes could not be executed on database: Query:\n" + query);
         } finally {
             pool.releaseConnection(conn);
-            log.info("Connection was released after free query execution.");
+            log.info(MyPortletUI.toolname + ": " + "Connection was released after free query execution.");
         }
     }
 

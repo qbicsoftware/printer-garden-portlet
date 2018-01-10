@@ -6,6 +6,7 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.TabSheet;
 import life.qbic.model.main.MyPortletUI;
 import life.qbic.model.config.ConfigurationManagerFactory;
 import life.qbic.model.database.Database;
@@ -36,8 +37,8 @@ public class MainPresenter {
     public MainPresenter(MainView view, MyPortletUI ui){
 
         if (LiferayAndVaadinUtils.isLiferayPortlet()) {
-            log.info("Printer Garden is running on Liferay and user is logged in.");
-            log.info("UserID = " + LiferayAndVaadinUtils.getUser().getScreenName());
+            log.info(MyPortletUI.toolname + ": " +"Printer Garden is running on Liferay and user is logged in.");
+            log.info(MyPortletUI.toolname + ": " +"UserID = " + LiferayAndVaadinUtils.getUser().getScreenName());
         }
 
         this.view = view;
@@ -49,15 +50,16 @@ public class MainPresenter {
 
         connectToDatabase();
         setUpListeners();
+
     }
 
     private void connectToDatabase(){
         try {
-            log.debug("Trying to connect to database.");
+            log.debug(MyPortletUI.toolname + ": " +"Trying to connect to database.");
             this.database.connectToDatabase();
-            log.info("Connection to database was successful.");
+            log.info(MyPortletUI.toolname + ": " +"Connection to database was successful.");
         } catch (SQLException exp) {
-            log.error(LiferayAndVaadinUtils.getUser().getScreenName() + " could not connect to database. Reason: " + exp.getMessage());
+            log.error(MyPortletUI.toolname + ": " + LiferayAndVaadinUtils.getUser().getScreenName() + " could not connect to database. Reason: " + exp.getMessage());
         }
     }
 
@@ -69,17 +71,17 @@ public class MainPresenter {
         this.view.getSelection().addValueChangeListener(valueChangeEvent -> {
             if (this.view.getSelection().getValue().equals("Printer")) {
                 addPrinter();
-                log.info("Printer table was selected");
+                log.info(MyPortletUI.toolname + ": " +"Printer table was selected");
             }else if(this.view.getSelection().getValue().equals("Printer Project Association")){
                 addPrinterProject();
-                log.info("Printer Project table was selected");
+                log.info(MyPortletUI.toolname + ": " +"Printer Project table was selected");
             }
         });
     }
 
     private void addPrinter(){
         try {
-            log.debug("Try to access and retrieve printer table");
+            log.debug(MyPortletUI.toolname + ": " +"Try to access and retrieve printer table");
             SQLContainer allExisIds = new SQLContainer(new FreeformQuery(
                     Query.selectFrom(Collections.singletonList(PrinterFields.ID.toString()),
                             Collections.singletonList(Table.labelprinter.toString()))+";",
@@ -88,9 +90,9 @@ public class MainPresenter {
             Grid grid = makeGridEditable(getPrinterGrid());
             PrinterPresenter presenter = new PrinterPresenter(form, database, grid);
             this.view.addGrid(grid, form);
-            log.info("Printer table was retrieved and set up successfully.");
+            log.info(MyPortletUI.toolname + ": " +"Printer table was retrieved and set up successfully.");
         }catch(SQLException e){
-            log.error("Access and retrieval of printer table failed: " + e.getMessage());
+            log.error(MyPortletUI.toolname + ": " +"Access and retrieval of printer table failed: " + e.getMessage());
 
         }
     }
@@ -111,7 +113,7 @@ public class MainPresenter {
 
     private void addPrinterProject(){
         try {
-            log.debug("Try to access and retrieve printer-project table");
+            log.debug(MyPortletUI.toolname + ": " +"Try to access and retrieve printer-project table");
             SQLContainer allExisIds = new SQLContainer(new FreeformQuery(
                     Query.selectFrom(Collections.singletonList(PrinterProjectFields.ID.toString()),
                             Collections.singletonList(Table.printer_project_association.toString()))+";",
@@ -128,9 +130,9 @@ public class MainPresenter {
             Grid grid = getPrinterProjectGrid();
             PrinterProjectPresenter presenter = new PrinterProjectPresenter(form, database, grid);
             this.view.addGrid(grid, form);
-            log.info("Printer-project table was retrieved and set up successfully.");
+            log.info(MyPortletUI.toolname + ": " +"Printer-project table was retrieved and set up successfully.");
         }catch(SQLException e){
-            log.error("Printer-project table could not be set up " + e.getMessage());
+            log.error(MyPortletUI.toolname + ": " +"Printer-project table could not be set up " + e.getMessage());
 
         }
     }
@@ -142,14 +144,14 @@ public class MainPresenter {
     private Grid getPrinterGrid(){
         Grid printerGrid = new Grid();
         try {
-            log.debug("Try to load printer table.");
+            log.debug(MyPortletUI.toolname + ": " +"Try to load printer table.");
             SQLContainer tableLabelprinter = database.loadCompleteTable(Table.labelprinter.toString(), "id");
             printerGrid = loadTableToGrid(tableLabelprinter);
             printerGrid.setEditorEnabled(true);
             printerGrid.setEditorBuffered(true);
-            log.info("Successfully loaded printer table.");
+            log.info(MyPortletUI.toolname + ": " +"Successfully loaded printer table.");
         }catch(SQLException e){
-            log.error("Printer table could not be loaded: " + e.getMessage());
+            log.error(MyPortletUI.toolname + ": " +"Printer table could not be loaded: " + e.getMessage());
 
         }
         return printerGrid;
@@ -166,7 +168,7 @@ public class MainPresenter {
         List<String> location = Collections.singletonList(Table.printer_project_association.toString());
 
         try {
-            log.debug("Try to load and configure printer-project table with freeFormQueries");
+            log.debug(MyPortletUI.toolname + ": " +"Try to load and configure printer-project table with freeFormQueries");
             SQLContainer tablePrinterProjectAssociation = database.loadTableFromQuery(
                     Query.selectFrom(printerProjectFields, location) +
                             " " + Query.innerJoinOn(Table.labelprinter.toString(), PrinterProjectFields.PRINTER_ID.toString(), PrinterFields.ID.toString()) +
@@ -176,9 +178,9 @@ public class MainPresenter {
             printerProjectAssociationGrid = loadTableToGrid(tablePrinterProjectAssociation);
             printerProjectAssociationGrid.setEditorEnabled(false);
             printerProjectAssociationGrid.setEditorBuffered(false);
-            log.info("Printer-project table was loaded successfully.");
+            log.info(MyPortletUI.toolname + ": " +"Printer-project table was loaded successfully.");
         }catch(SQLException e){
-            log.error("Printer-project table could not be loaded: " + e.getMessage());
+            log.error(MyPortletUI.toolname + ": " +"Printer-project table could not be loaded: " + e.getMessage());
         }
         return printerProjectAssociationGrid;
 
@@ -186,7 +188,7 @@ public class MainPresenter {
 
     private Grid loadTableToGrid(SQLContainer table){
 
-        log.info("Loading of table from Database was successful.");
+        log.info(MyPortletUI.toolname + ": " +"Loading of table from Database was successful.");
         Grid grid = new Grid();
         grid.isEditorActive();
         grid.setContainerDataSource(table);

@@ -5,6 +5,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vaadin.ui.Grid;
 import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
+import life.qbic.model.main.MyPortletUI;
 import life.qbic.model.tables.Table;
 import life.qbic.model.tables.printer.PrinterFields;
 import life.qbic.model.tables.printerProjectAssociation.PrinterProjectAssociation;
@@ -44,10 +45,10 @@ class PrinterProjectPresenter {
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (this.form.getPrinterNameLocation() == null || this.form.getProjectName().isEmpty()) {
                 MyNotification.notification("Information", "Please enter information!", "" );
-                log.info("No information to safe was provided in the printer-project form.");
+                log.info(MyPortletUI.toolname + ": " + "No information to safe was provided in the printer-project form.");
 
             }else{
-                log.info("New entry is saved to printer-project table.");
+                log.info(MyPortletUI.toolname + ": " + "New entry is saved to printer-project table.");
                 saveToPrinterProject(form.getFormEntries());
                 reload();
                 this.form.emptyForm();
@@ -57,7 +58,7 @@ class PrinterProjectPresenter {
 
     private void saveToPrinterProject(PrinterProjectAssociation entry) {
 
-        log.info("Try to save new entry with: \n" +
+        log.info(MyPortletUI.toolname + ": " +"Try to save new entry with: \n" +
                 "\tprinterName:\t" + entry.getPrinterName() + "\n" +
                 "\tprojectName:\t" + entry.getProjectName()  + "\n" +
                 "\tstatus:\t" + entry.getStatus());
@@ -91,10 +92,10 @@ class PrinterProjectPresenter {
 
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
-            log.info("No information to delete was provided in the printer-project form.");
+            log.info(MyPortletUI.toolname + ": " +"No information to delete was provided in the printer-project form.");
             MyNotification.notification("Information", "Please enter information!", "" );
         } else {
-            log.info("Entry with ID " + this.form.getRowID().getItem(
+            log.info(MyPortletUI.toolname + ": " +"Entry with ID " + this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2] +" is deleted");
             database.delete(Table.printer_project_association.toString(), this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2]);

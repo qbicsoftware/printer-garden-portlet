@@ -7,6 +7,7 @@ import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.ui.Grid;
 import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
+import life.qbic.model.main.MyPortletUI;
 import life.qbic.model.tables.Table;
 import life.qbic.model.tables.printer.Printer;
 import life.qbic.utils.MyNotification;
@@ -45,9 +46,9 @@ class PrinterPresenter {
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (isInvalidForm()) {
                 MyNotification.notification("Information", "Please enter information!", "" );
-                log.info("No information to safe was provided in the printer form.");
+                log.info(MyPortletUI.toolname + ": " +"No information to safe was provided in the printer form.");
             } else {
-                log.info("New entry is saved to printer table.");
+                log.info(MyPortletUI.toolname + ": " +"New entry is saved to printer table.");
                 saveToPrinter(form.getFormEntries());
                 reload();
                 this.form.emptyForm();
@@ -70,7 +71,7 @@ class PrinterPresenter {
         if(isNameAndLocationUnique(entry.getName(), entry.getLocation())) {
             //also the url/ipadress should have the correct format
             if(URLValidator.validate(entry.getUrl())) {
-                log.info("Try to save new entry with \n" +
+                log.info(MyPortletUI.toolname + ": " +"Try to save new entry with \n" +
                         "\tname:\t" + entry.getName() + "\n" +
                         "\tlocation:\t" + entry.getLocation()  + "\n" +
                         "\turl:\t" + entry.getUrl() + "\n" +
@@ -91,18 +92,18 @@ class PrinterPresenter {
 
                 database.save(Table.labelprinter.toString(), entries, values, false);
             }else{
-                log.error("Provided URL is has incorrect format.");
+                log.error(MyPortletUI.toolname + ": " +"Provided URL is has incorrect format.");
                 MyNotification.notification("Error", "Please enter a correctly formatted URL!", "error");
             }
         }else{
-            log.error("(Name, Location) is already assigned. Tuple has to be unique.");
+            log.error(MyPortletUI.toolname + ": " +"(Name, Location) is already assigned. Tuple has to be unique.");
             MyNotification.notification("Error", "(Name, Location) is already assigned. Please use a unique tuple!", "error");
         }
     }
 
     private Boolean isNameAndLocationUnique(String name, String location) {
         try {
-            log.debug("Try to validate if (name, location) tuple is unique");
+            log.debug(MyPortletUI.toolname + ": " +"Try to validate if (name, location) tuple is unique");
             SQLContainer currentPrinterNameLocations = database.loadTableFromQuery(
                     Query.selectFrom(Arrays.asList("name", "location"), Collections.singletonList(Table.labelprinter.toString())) + ";");
 
@@ -118,9 +119,9 @@ class PrinterPresenter {
                     return false;
                 }
             }
-            log.info("Tuple validation was successful.");
+            log.info(MyPortletUI.toolname + ": " +"Tuple validation was successful.");
         }catch(SQLException e){
-            log.error("Tuple validation failed: " + e.getMessage());
+            log.error(MyPortletUI.toolname + ": " +"Tuple validation failed: " + e.getMessage());
         }
         return true;
     }
@@ -136,10 +137,10 @@ class PrinterPresenter {
 
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
-            log.info("No information to delete was provided in the printer form.");
+            log.info(MyPortletUI.toolname + ": " +"No information to delete was provided in the printer form.");
             MyNotification.notification("Information", "Please enter information!", "" );
         } else {
-            log.info("Entry with ID " + this.form.getRowID().getItem(
+            log.info(MyPortletUI.toolname + ": " +"Entry with ID " + this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2] +" is deleted");
             database.delete(Table.labelprinter.toString(), this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2]);

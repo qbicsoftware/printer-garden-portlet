@@ -19,6 +19,7 @@ public class MainView {
         HorizontalLayout layout = new HorizontalLayout();
         layout.addComponent(this.selection);
         layout.setComponentAlignment(selection, Alignment.MIDDLE_CENTER);
+
         this.rootFrame.addComponent(layout);
         this.rootFrame.setComponentAlignment(layout, Alignment.MIDDLE_CENTER );
 
