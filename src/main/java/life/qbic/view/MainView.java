@@ -9,6 +9,7 @@ public class MainView {
     private final OptionGroup selection;
     private final VerticalLayout rootFrame;
     private final MyPortletUI ui;
+
     public MainView(MyPortletUI ui){
         this.selection = new OptionGroup("Change selection: ");
         this.selection.addItems("Printer", "Printer Project Association");

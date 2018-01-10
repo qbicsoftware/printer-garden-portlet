@@ -15,7 +15,7 @@ import life.qbic.view.MainView;
 public class MyPortletUI extends UI {
 
     private static final Log log = LogFactoryUtil.getLog(MyPortletUI.class.getName());
-    public static final String toolname = "Printer-Garden";
+    public static final String toolname = "Printer-Garden v. -1";
 
     @Override
     protected void init(VaadinRequest request) {
