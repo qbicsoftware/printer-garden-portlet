@@ -3,6 +3,7 @@ package life.qbic.presenter;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.server.Page;
+import com.vaadin.shared.Position;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Notification;
 import life.qbic.model.database.Database;
@@ -128,6 +129,8 @@ class PrinterPresenter {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
             Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
             notification.setDelayMsec(30);
+            notification.setPosition(Position.MIDDLE_CENTER);
+
             notification.show(Page.getCurrent());
         } else {
             database.delete(Table.labelprinter.toString(), this.form.getRowID().getItem(
