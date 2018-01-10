@@ -14,14 +14,16 @@ import life.qbic.model.tables.printer.PrinterType;
 
 public class PrinterFormView extends AFormView implements IFormView {
 
-    private final TextField name = new TextField("Name (Required)");
-    private final TextField location = new TextField("Location (Required)");
-    private final TextField url = new TextField("URL (Required)");
+    private final TextField name = new TextField("Name*");
+    private final TextField location = new TextField("Location*");
+    private final TextField url = new TextField("URL*");
     private final TextField userGroup = new TextField("User group");
 
-    private final ComboBox status = new ComboBox("Status (Required)");
-    private final ComboBox type = new ComboBox("Type (Required)");
+    private final ComboBox status = new ComboBox("Status*");
+    private final ComboBox type = new ComboBox("Type*");
     private final CheckBox adminOnly = new CheckBox("Admin only");
+
+    private final Label requiredText = new Label("* Required field");
 
     private final HorizontalLayout options = new HorizontalLayout();
     private final VerticalLayout saveForm = new VerticalLayout();
@@ -37,7 +39,7 @@ public class PrinterFormView extends AFormView implements IFormView {
     @Override
     public void addComponentsToView() {
         saveForm.addComponents(name, location, url, status, type, adminOnly, userGroup,
-                getSaveButton());
+                getSaveButton(), requiredText);
         saveForm.setSpacing(true);
         deleteForm.addComponents(getRowID(), getDeleteButton());
         deleteForm.setSpacing(true);
