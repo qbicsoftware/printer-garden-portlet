@@ -161,7 +161,7 @@ public class MainPresenter {
             printerProjectAssociationGrid.setEditorEnabled(false);
             printerProjectAssociationGrid.setEditorBuffered(false);
         }catch(SQLException e){
-            log.error("Could not connect to SQL model.database. Reason: " + e.getMessage());
+            log.error("Could not connect to SQL database. Reason: " + e.getMessage());
         }
         return printerProjectAssociationGrid;
 

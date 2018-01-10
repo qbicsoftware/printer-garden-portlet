@@ -9,6 +9,7 @@ import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
 import life.qbic.model.tables.Table;
 import life.qbic.model.tables.printer.Printer;
+import life.qbic.utils.MyNotification;
 import life.qbic.utils.URLValidator;
 import life.qbic.view.forms.PrinterFormView;
 
@@ -40,9 +41,10 @@ class PrinterPresenter {
     private void saveButtonListener() {
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (isInvalidForm()) {
-                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
-                notification.setDelayMsec(30);
-                notification.show(Page.getCurrent());
+                MyNotification.notification("Error", "Dataset could not be found in openbis", "error");
+//                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
+//                notification.setDelayMsec(30);
+//                notification.show(Page.getCurrent());
             } else {
                 saveToPrinter(form.getFormEntries());
                 reload();
@@ -78,12 +80,14 @@ class PrinterPresenter {
 
                 database.save(Table.labelprinter.toString(), entries, values, false);
             }else{
-                Notification notification = new Notification("Please enter a correctly formatted URL!", Notification.Type.ERROR_MESSAGE);
-                notification.show(Page.getCurrent());
+                MyNotification.notification("Error", "Dataset could not be found in openbis", "error");
+//                Notification notification = new Notification("Please enter a correctly formatted URL!", Notification.Type.ERROR_MESSAGE);
+//                notification.show(Page.getCurrent());
             }
         }else{
-            Notification notification = new Notification("(Name, Location) is already assigned. Please use a unique tuple!", Notification.Type.ERROR_MESSAGE);
-            notification.show(Page.getCurrent());
+            MyNotification.notification("Error", "Dataset could not be found in openbis", "error");
+//            Notification notification = new Notification("(Name, Location) is already assigned. Please use a unique tuple!", Notification.Type.ERROR_MESSAGE);
+//            notification.show(Page.getCurrent());
         }
     }
 
