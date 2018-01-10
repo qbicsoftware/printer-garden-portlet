@@ -1,5 +1,9 @@
 package life.qbic.model.tables;
 
+/**
+ * This enum {@link Table} holds currently used tablenames.
+ * @author fhanssen
+ */
 public enum Table {
     printer_project_association("printer_project_association"),
     labelprinter("labelprinter"),

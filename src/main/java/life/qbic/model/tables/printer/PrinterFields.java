@@ -2,6 +2,12 @@ package life.qbic.model.tables.printer;
 
 import life.qbic.model.tables.Table;
 
+/**
+ * This enum @{@link PrinterFields} holds fields found in printer table view entries.
+ *
+ * @author fhanssen
+ */
+
 public enum PrinterFields {
     ID(Table.labelprinter.toString() + ".id"),
     NAME(Table.labelprinter.toString() + ".name"),

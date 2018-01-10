@@ -1,5 +1,11 @@
 package life.qbic.model.tables.printerProjectAssociation;
 
+/**
+ * This enum @{@link PrinterProjectStatus} holds available status values for printers.
+ *
+ * @author fhanssen
+ */
+
 public enum PrinterProjectStatus {
     ACTIVE("ACTIVE"),
     INACTIVE("INACTIVE");

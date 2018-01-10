@@ -2,6 +2,12 @@ package life.qbic.model.tables.printer;
 
 import java.io.Serializable;
 
+/**
+ * The class {@link Printer} provides all fields needed to add a new printer.
+ *
+ * @author fhanssen
+ */
+
 @SuppressWarnings("serial")
 public class Printer implements Serializable, Cloneable {
 

@@ -2,6 +2,11 @@ package life.qbic.model.tables.printerProjectAssociation;
 
 import life.qbic.model.tables.Table;
 
+/**
+ * This enum @{@link PrinterProjectFields} contains currently used table fields.
+ * @author fhanssen
+ */
+
 public enum PrinterProjectFields {
     ID(Table.printer_project_association + ".id"),
     PRINTER_ID(Table.printer_project_association + ".printer_id"),

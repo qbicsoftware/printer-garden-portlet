@@ -6,7 +6,7 @@ import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.TabSheet;
+import life.qbic.model.config.ConfigurationManager;
 import life.qbic.model.main.MyPortletUI;
 import life.qbic.model.config.ConfigurationManagerFactory;
 import life.qbic.model.database.Database;
@@ -27,6 +27,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The class {@link MainPresenter} handles the initial user input. The selected tables are loaded and delegated to
+ * their own presenters. The database connection is established here.
+ *
+ *
+ * @author fhanssen
+ */
+
 public class MainPresenter {
 
     private final MainView view;
@@ -44,7 +52,7 @@ public class MainPresenter {
 
         this.view = view;
 
-        life.qbic.model.config.ConfigurationManager c = ConfigurationManagerFactory.getInstance();
+        ConfigurationManager c = ConfigurationManagerFactory.getInstance();
         //some issue with added whitespaces, trim those
         this.database = new Database(c.getMysqlUser().trim(), c.getMysqlPass().trim(), "",
                 "jdbc:mariadb://" + c.getMysqlHost().trim()+ ":" + c.getMysqlPort().trim() + "/" + c.getMysqlDB().trim());
@@ -69,6 +77,9 @@ public class MainPresenter {
         addSelectionListener();
     }
 
+    /**
+     * Handles toggle group selection: either the printer table or the printer project table is loaded
+     */
     private void addSelectionListener(){
         this.view.getSelection().addValueChangeListener(valueChangeEvent -> {
             if (this.view.getSelection().getValue().equals("Printer")) {
@@ -81,6 +92,11 @@ public class MainPresenter {
         });
     }
 
+
+    /**
+     * Printer table is loaded. The existing ids are loaded in a free form query to add them to the printer form.
+     * This makes the comboBox 'ID' searchable.
+     */
     private void addPrinter(){
         try {
             log.debug(MyPortletUI.toolname + ": " +"Try to access and retrieve printer table");
@@ -114,6 +130,11 @@ public class MainPresenter {
         return grid;
     }
 
+    /**
+     * Add the printer project table via multiple free queries. This allows for extraction of foreign key information.
+     * The printer-project associations are specified via foreign keys. In order to extract the data they are matching to
+     * join queries are needed.
+     */
     private void addPrinterProject(){
         try {
             log.debug(MyPortletUI.toolname + ": " +"Try to access and retrieve printer-project table");
@@ -145,6 +166,10 @@ public class MainPresenter {
         grid.clearSortOrder();
     }
 
+    /**
+     * Loads the printer table into a grid
+     * @return grid containing printer table data
+     */
     private Grid getPrinterGrid(){
         Grid printerGrid = new Grid();
         try {
@@ -162,6 +187,10 @@ public class MainPresenter {
         return printerGrid;
     }
 
+    /**
+     * Loads the printer project table into a grid
+     * @return grid containing printer project association table, but with text entries, not foreign keys
+     */
     private Grid getPrinterProjectGrid(){
         Grid printerProjectAssociationGrid = new Grid();
         List<String> printerProjectFields = Arrays.asList(PrinterProjectFields.ID.toString(),
@@ -192,6 +221,11 @@ public class MainPresenter {
 
     }
 
+    /**
+     * Takes a sqlcontainer and adds its data into a grid
+     * @param table
+     * @return grid with data
+     */
     private Grid loadTableToGrid(SQLContainer table){
 
         log.info(MyPortletUI.toolname + ": " +"Loading of table from Database was successful.");

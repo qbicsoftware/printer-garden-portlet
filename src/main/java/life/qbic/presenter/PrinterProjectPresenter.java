@@ -2,6 +2,8 @@ package life.qbic.presenter;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.vaadin.data.util.sqlcontainer.SQLContainer;
+import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.ui.Grid;
 import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
@@ -9,15 +11,22 @@ import life.qbic.model.main.MyPortletUI;
 import life.qbic.model.tables.Table;
 import life.qbic.model.tables.printer.PrinterFields;
 import life.qbic.model.tables.printerProjectAssociation.PrinterProjectAssociation;
+import life.qbic.model.tables.printerProjectAssociation.PrinterProjectFields;
 import life.qbic.model.tables.project.ProjectFields;
 import life.qbic.utils.MyNotification;
 import org.javatuples.Pair;
 import life.qbic.view.forms.PrinterProjectFormView;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class {@link PrinterProjectAssociation} handles operations on the printer project table view.
+ *
+ * @author fhanssen
+ */
 class PrinterProjectPresenter {
 
     private final PrinterProjectFormView form;
@@ -41,6 +50,9 @@ class PrinterProjectPresenter {
 
     }
 
+    /**
+     * When the save button is pressed, all values of the form fields are read.
+     */
     private void saveButtonListener(){
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (this.form.getPrinterNameLocation() == null || this.form.getProjectName().isEmpty()) {
@@ -56,6 +68,11 @@ class PrinterProjectPresenter {
         });
     }
 
+    /**
+     * A new entry is saved to a printer project. Due to the joint queries when setting up the table, they correct
+     * foreign keys need to be extracted to save a database entry.
+     * @param entry new Printer Project
+     */
     private void saveToPrinterProject(PrinterProjectAssociation entry) {
 
         log.info(MyPortletUI.toolname + ": " +"Try to save new entry with: \n" +
@@ -78,8 +95,21 @@ class PrinterProjectPresenter {
 
     }
 
+    /**
+     * Reloads table views and the delete id combobox, which is dependent on the current table entries.
+     */
     private void reload(){
         grid.clearSortOrder();
+        try {
+            SQLContainer allExisIds = new SQLContainer(new FreeformQuery(
+                    Query.selectFrom(Collections.singletonList(PrinterProjectFields.ID.toString()),
+                            Collections.singletonList(Table.printer_project_association.toString()))+";",
+                    database.getPool()));
+            form.setExistingIDs(allExisIds);
+        }catch(SQLException e){
+            MyNotification.notification("Error", "Database access failed.", "error");
+            log.error(MyPortletUI.toolname + ": " +"ID combobox values could not be updated: " + e.getMessage());
+        }
     }
 
     private void deleteButtonListener() {
@@ -90,6 +120,9 @@ class PrinterProjectPresenter {
         });
     }
 
+    /**
+     * An entry belonging to a selected ID is deleted.
+     */
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
             log.info(MyPortletUI.toolname + ": " +"No information to delete was provided in the printer-project form.");

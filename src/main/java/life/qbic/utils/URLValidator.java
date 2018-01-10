@@ -3,10 +3,15 @@ package life.qbic.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-/*
-Source: http://www.geeksforgeeks.org/check-if-url-is-valid-or-not-in-java/
+/**
+ *
+ * This class {@link URLValidator} validates if an IP address or URL matches the expected pattern via regular expressions
+ *  The used regexs can be found here:
+ *  URL Pattern: https://www.neowin.net/forum/topic/853774-java-regex-to-validate-url/
+ *  IP Pattern: https://www.mkyong.com/regular-expressions/how-to-validate-ip-address-with-regular-expression/
+ *  @author fhanssen
  */
+
 public final class URLValidator {
 
     //Wikipedia says ports have at most five digits

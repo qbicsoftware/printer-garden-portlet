@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.javatuples.Pair;
 
+/**
+ * The class {@link Query} provides useful queries.
+ *
+ * @author fhanssen
+ */
+
 public final class Query {
 
     public static String selectFrom(List<String> entry, List<String> location){

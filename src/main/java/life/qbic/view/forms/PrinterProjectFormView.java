@@ -6,6 +6,10 @@ import com.vaadin.ui.*;
 import life.qbic.model.tables.printerProjectAssociation.PrinterProjectAssociation;
 import life.qbic.model.tables.printerProjectAssociation.PrinterProjectStatus;
 
+/**
+ * This class {@link PrinterProjectFormView} sets up input fields for the user.
+ * @author fhanssen
+ */
 
 public class PrinterProjectFormView extends AFormView implements IFormView {
 

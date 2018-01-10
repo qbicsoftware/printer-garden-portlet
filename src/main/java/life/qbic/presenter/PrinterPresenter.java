@@ -4,12 +4,14 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
+import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.ui.Grid;
 import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
 import life.qbic.model.main.MyPortletUI;
 import life.qbic.model.tables.Table;
 import life.qbic.model.tables.printer.Printer;
+import life.qbic.model.tables.printer.PrinterFields;
 import life.qbic.utils.MyNotification;
 import life.qbic.utils.URLValidator;
 import life.qbic.view.forms.PrinterFormView;
@@ -20,6 +22,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class {@link PrinterPresenter} handles operations in the printer table view.
+ *
+ * @author fhanssen
+ */
 class PrinterPresenter {
 
     private final PrinterFormView form;
@@ -42,6 +49,10 @@ class PrinterPresenter {
         deleteButtonListener();
     }
 
+    /**
+     * When the save button is pressed, all values of the form fields are read.
+     * If they are null or required fields are empty, the user is notified.
+     */
     private void saveButtonListener() {
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (isInvalidForm()) {
@@ -63,6 +74,11 @@ class PrinterPresenter {
                 || this.form.getUrl().isEmpty();
     }
 
+    /**
+     * A new entry is saved to a printer iff the tuple(name, location) does not appear in the table and
+     * if a valid URL is added
+     * @param entry new Printer
+     */
     private void saveToPrinter(Printer entry){
         List<String> entries;
         List<String> values;
@@ -101,6 +117,12 @@ class PrinterPresenter {
         }
     }
 
+    /**
+     * Checks if the tuple(name, location) appears in the table
+     * @param name printer name
+     * @param location printer location
+     * @return true: tuple has not been found in table, false: else
+     */
     private Boolean isNameAndLocationUnique(String name, String location) {
         try {
             log.debug(MyPortletUI.toolname + ": " +"Try to validate if (name, location) tuple is unique");
@@ -127,15 +149,30 @@ class PrinterPresenter {
         return true;
     }
 
-
+    /**
+     * Reloads table views and the delete id combobox, which is dependent on the current table entries.
+     */
     private void reload() {
         grid.clearSortOrder();
+        try {
+            SQLContainer allExisIds = new SQLContainer(new FreeformQuery(
+                    Query.selectFrom(Collections.singletonList(PrinterFields.ID.toString()),
+                            Collections.singletonList(Table.labelprinter.toString())) + ";",
+                    database.getPool()));
+            form.setExistingIDs(allExisIds);
+        }catch(SQLException e){
+            MyNotification.notification("Error", "Database access failed.", "error");
+            log.error(MyPortletUI.toolname + ": " +"ID combobox values could not be updated: " + e.getMessage());
+        }
     }
 
     private void deleteButtonListener() {
         this.form.getDeleteButton().addClickListener(clickEvent -> deleteEntry());
     }
 
+    /**
+     * An entry belonging to a selected ID is deleted.
+     */
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
             log.info(MyPortletUI.toolname + ": " +"No information to delete was provided in the printer form.");

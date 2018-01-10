@@ -1,7 +1,14 @@
 package life.qbic.model.tables.printerProjectAssociation;
 
+import life.qbic.model.tables.printer.Printer;
+
 import java.io.Serializable;
 
+/**
+ * The class {@link PrinterProjectAssociation} provides all fields needed to add a new printer project association.
+ *
+ * @author fhanssen
+ */
 @SuppressWarnings("serial")
 public class PrinterProjectAssociation implements Serializable, Cloneable {
 
