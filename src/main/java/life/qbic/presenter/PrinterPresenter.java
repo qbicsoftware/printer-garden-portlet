@@ -42,7 +42,7 @@ class PrinterPresenter {
     private void saveButtonListener() {
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (isInvalidForm()) {
-                MyNotification.notification("Error", "Dataset could not be found in openbis", "error");
+                MyNotification.notification("Information", "Please enter information!", "" );
 //                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
 //                notification.setDelayMsec(30);
 //                notification.show(Page.getCurrent());
@@ -81,12 +81,12 @@ class PrinterPresenter {
 
                 database.save(Table.labelprinter.toString(), entries, values, false);
             }else{
-                MyNotification.notification("Error", "Dataset could not be found in openbis", "error");
+                MyNotification.notification("Error", "Please enter a correctly formatted URL!", "error");
 //                Notification notification = new Notification("Please enter a correctly formatted URL!", Notification.Type.ERROR_MESSAGE);
 //                notification.show(Page.getCurrent());
             }
         }else{
-            MyNotification.notification("Error", "Dataset could not be found in openbis", "error");
+            MyNotification.notification("Error", "(Name, Location) is already assigned. Please use a unique tuple!", "error");
 //            Notification notification = new Notification("(Name, Location) is already assigned. Please use a unique tuple!", Notification.Type.ERROR_MESSAGE);
 //            notification.show(Page.getCurrent());
         }
@@ -127,11 +127,12 @@ class PrinterPresenter {
 
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
-            Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
-            notification.setDelayMsec(30);
-            notification.setPosition(Position.MIDDLE_CENTER);
-
-            notification.show(Page.getCurrent());
+            MyNotification.notification("Information", "Please enter information!", "" );
+//            Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
+//            notification.setDelayMsec(30);
+//            notification.setPosition(Position.MIDDLE_CENTER);
+//
+//            notification.show(Page.getCurrent());
         } else {
             database.delete(Table.labelprinter.toString(), this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2]);

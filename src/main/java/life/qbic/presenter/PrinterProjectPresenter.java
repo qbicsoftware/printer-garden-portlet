@@ -1,14 +1,13 @@
 package life.qbic.presenter;
 
-import com.vaadin.server.Page;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Notification;
 import life.qbic.model.database.Database;
 import life.qbic.model.database.Query;
 import life.qbic.model.tables.Table;
 import life.qbic.model.tables.printer.PrinterFields;
 import life.qbic.model.tables.printerProjectAssociation.PrinterProjectAssociation;
 import life.qbic.model.tables.project.ProjectFields;
+import life.qbic.utils.MyNotification;
 import org.javatuples.Pair;
 import life.qbic.view.forms.PrinterProjectFormView;
 
@@ -39,9 +38,11 @@ class PrinterProjectPresenter {
     private void saveButtonListener(){
         this.form.getSaveButton().addClickListener(clickEvent -> {
             if (this.form.getPrinterNameLocation() == null || this.form.getProjectName().isEmpty()) {
-                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
-                notification.setDelayMsec(30);
-                notification.show(Page.getCurrent());
+                MyNotification.notification("Information", "Please enter information!", "" );
+
+//                Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
+//                notification.setDelayMsec(30);
+//                notification.show(Page.getCurrent());
             }else{
                 saveToPrinterProject(form.getFormEntries());
                 reload();
@@ -81,9 +82,11 @@ class PrinterProjectPresenter {
 
     private void deleteEntry() {
         if (this.form.getRowID() == null || this.form.getRowID().isEmpty()) {
-            Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
-            notification.setDelayMsec(30);
-            notification.show(Page.getCurrent());
+            MyNotification.notification("Information", "Please enter information!", "" );
+
+//            Notification notification = new Notification("Please enter information!", Notification.Type.HUMANIZED_MESSAGE);
+//            notification.setDelayMsec(30);
+//            notification.show(Page.getCurrent());
         } else {
             database.delete(Table.printer_project_association.toString(), this.form.getRowID().getItem(
                     this.form.getRowID().getValue()).toString().split(":")[2]);

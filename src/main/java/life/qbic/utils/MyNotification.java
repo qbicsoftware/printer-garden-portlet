@@ -7,18 +7,12 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
- * The class {} provides useful methods.
+ * The class {@link MyNotification} provides useful methods.
  *
  * @author spaethju
  */
-public class MyNotification {
+public final class MyNotification {
 
-    /**
-     * Constructor
-     */
-    public MyNotification() {
-
-    }
 
     /**
      * Shows a notification in the center of the window.
@@ -42,7 +36,7 @@ public class MyNotification {
             notify.setIcon(FontAwesome.COMMENT);
             notify.setStyleName(ValoTheme.NOTIFICATION_TRAY + " " + ValoTheme.NOTIFICATION_CLOSABLE);
         }
-        notify.setPosition(Position.MIDDLE_CENTER);
+        //notify.setPosition(Position.MIDDLE_CENTER);
         notify.show(Page.getCurrent());
     }
 }
