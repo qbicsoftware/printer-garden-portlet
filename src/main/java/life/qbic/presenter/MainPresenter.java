@@ -19,9 +19,7 @@ import life.qbic.utils.MyNotification;
 import life.qbic.view.MainView;
 import life.qbic.view.forms.PrinterFormView;
 import life.qbic.view.forms.PrinterProjectFormView;
-import life.qbic.portal.liferayandvaadinhelpers.main.LiferayAndVaadinUtils;
-
-
+import life.qbic.portal.utils.PortalUtils;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,9 +43,9 @@ public class MainPresenter {
 
     public MainPresenter(MainView view, MyPortletUI ui){
 
-        if (LiferayAndVaadinUtils.isLiferayPortlet()) {
+        if (PortalUtils.isLiferayPortlet()) {
             log.info(MyPortletUI.toolname + ": " +"Printer Garden is running on Liferay and user is logged in.");
-            log.info(MyPortletUI.toolname + ": " +"UserID = " + LiferayAndVaadinUtils.getUser().getScreenName());
+            log.info(MyPortletUI.toolname + ": " +"UserID = " + PortalUtils.getUser().getScreenName());
         }
 
         this.view = view;
@@ -69,7 +67,7 @@ public class MainPresenter {
             log.info(MyPortletUI.toolname + ": " +"Connection to database was successful.");
         } catch (SQLException exp) {
             MyNotification.notification("Error", "Database connection failed.", "error");
-            log.error(MyPortletUI.toolname + ": " + LiferayAndVaadinUtils.getUser().getScreenName() + " could not connect to database. Reason: " + exp.getMessage());
+            log.error(MyPortletUI.toolname + ": " + PortalUtils.getUser().getScreenName() + " could not connect to database. Reason: " + exp.getMessage());
         }
     }
 
