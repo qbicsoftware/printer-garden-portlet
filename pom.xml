@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>life.qbic</groupId>
 	<artifactId>printer-garden</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<name>Printer Garden</name>
 
 	<properties>
@@ -30,12 +30,12 @@
 		<repository>
 			<id>nexus-snap</id>
 			<name>qbic snapshots</name>
-			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-snapshots</url>
+			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-snapshots</url>
 		</repository>
 		<repository>
 			<id>nexus-release</id>
 			<name>qbic release</name>
-			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
+			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-releases</url>
 		</repository>
 	</repositories>
 
@@ -66,13 +66,13 @@
 			<uniqueVersion>true</uniqueVersion>
 			<id>nexus-release</id>
 			<name>QBiC Releases</name>
-			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
+			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-releases</url>
 		</repository>
 		<snapshotRepository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>nexus-snap</id>
 			<name>QBiC Snapshots</name>
-			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-snapshots</url>
+			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -138,21 +138,21 @@
 		</dependency>
 
 		<dependency>
-			<groupId>life.qbic.openbis</groupId>
-			<artifactId>openbisclient</artifactId>
-			<version>1.1.1</version>
+			<groupId>life.qbic</groupId>
+			<artifactId>openbis-client-lib</artifactId>
+			<version>1.3.1</version>
 		</dependency>
 
 		<dependency>
-			<groupId>life.qbic.openbis</groupId>
-			<artifactId>liferayandvaadinhelpers</artifactId>
-			<version>1.1.2</version>
+			<groupId>life.qbic</groupId>
+			<artifactId>portal-utils-lib</artifactId>
+			<version>2.2.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
+			<version>8.0.21</version>
 		</dependency>
 
 		<dependency>
