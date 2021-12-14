@@ -11,11 +11,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<vaadin.version>7.7.8</vaadin.version>
-		<vaadin.plugin.version>7.7.8</vaadin.plugin.version>
+		<vaadin.version>7.7.24</vaadin.version>
+		<vaadin.plugin.version>7.7.24</vaadin.plugin.version>
 		<liferay.version>6.2.5</liferay.version>
 		<liferay.maven.plugin.version>6.2.5</liferay.maven.plugin.version>
 		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
+		<log4j.version>2.15.0</log4j.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -25,17 +26,17 @@
 		<!-- vaadin repos -->
 		<repository>
 			<id>vaadin-addons</id>
-			<url>http://maven.vaadin.com/vaadin-addons</url>
+			<url>https://maven.vaadin.com/vaadin-addons</url>
 		</repository>
 		<repository>
 			<id>nexus-snap</id>
 			<name>qbic snapshots</name>
-			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-snapshots</url>
+			<url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
 		</repository>
 		<repository>
 			<id>nexus-release</id>
 			<name>qbic release</name>
-			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-releases</url>
+			<url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
 		</repository>
 	</repositories>
 
@@ -78,7 +79,16 @@
 
 
 	<dependencies>
-
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+  		<groupId>org.apache.logging.log4j</groupId>
+  		<artifactId>log4j-api</artifactId>
+  		<version>${log4j.version}</version>
+		</dependency>
 		<!-- Vaadin dependencies -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
