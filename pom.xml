@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>life.qbic</groupId>
 	<artifactId>printer-garden</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>Printer Garden</name>
 
 	<properties>
@@ -16,7 +16,7 @@
 		<liferay.version>6.2.5</liferay.version>
 		<liferay.maven.plugin.version>6.2.5</liferay.maven.plugin.version>
 		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
-		<log4j.version>2.15.0</log4j.version>
+		<log4j.version>2.17.1</log4j.version>
 	</properties>
 	<repositories>
 		<repository>
